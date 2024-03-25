@@ -2,5 +2,5 @@
 
 Helsingin yliopiston kurssin *Ohjelmistotekniikka* harjoitustyö ja viikkotehtävät.
 
-[Laskarit](laskarit/)
-[Vaatimusmäärittely](/study-app/dokumentaatio/vaatimusmaarittely.md)
+- [Laskarit](laskarit/)
+- [Vaatimusmäärittely](/study-app/dokumentaatio/vaatimusmaarittely.md)
