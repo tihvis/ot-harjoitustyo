@@ -11,5 +11,5 @@ coverage.xml
 *$py.class
 
 # data files
-data/studyapp.sqlite
-data/test-studyapp.sqlite
+study-app/data/studyapp.sqlite
+study-app/data/test-studyapp.sqlite
