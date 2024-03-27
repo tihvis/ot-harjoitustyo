@@ -5,3 +5,11 @@ htmlcov/
 coverage.xml
 .env
 *.code-workspace
+.vscode
+.DS_Store
+*.py[cod]
+*$py.class
+
+# data files
+data/studyapp.sqlite
+data/test-studyapp.sqlite
