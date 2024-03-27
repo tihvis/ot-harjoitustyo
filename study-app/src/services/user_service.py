@@ -26,7 +26,7 @@ class UserService:
         user = self._user_repository.find_by_username(username)
 
         if not user or user.password != password:
-            raise InvalidCredentialsError("Virheellinen käyttäjätunnus tai salasana")
+            raise InvalidCredentialsError
 
         self._user = user
 
@@ -45,10 +45,10 @@ class UserService:
         existing_user = self._user_repository.find_by_username(username)
 
         if existing_user:
-            raise UsernameExistsError(f"Käyttäjätunnus {username} on varattu.")
+            raise UsernameExistsError
 
         if password != password2:
-            raise PasswordConfirmationError("Syöttämäsi salasanat eivät vastanneet toisiaan.")
+            raise PasswordConfirmationError
 
         if not re.match(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])", password) or len(password)<8:
             raise InvalidPasswordError("""Salasanassa tulee olla vähintään 8 merkkiä,
