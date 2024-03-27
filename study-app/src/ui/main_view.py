@@ -55,7 +55,6 @@ class CourseView:
         self._handle_logout = handle_logout
         self._handle_add_course = handle_add_course
         self._handle_show_completed = handle_show_completed
-        self._handle_add_course = handle_add_course
         self._handle_show_course_page = handle_show_course_page
         self._user = user_service.get_current_user()
         self._frame = None
