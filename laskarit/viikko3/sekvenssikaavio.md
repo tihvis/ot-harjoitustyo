@@ -1,13 +1,13 @@
 ```mermaid
  sequenceDiagram
-    actor main
+    participant main
     participant laitehallinto
     participant rautatietori
     participant ratikka6
     participant bussi244
     participant kallen_kortti
     participant lippu_luukku
-    
+
     main->>laitehallinto: lisaa_lataaja(rautatietori)
     main->>laitehallinto: lisaa_lukija(ratikka6)
     main->>laitehallinto: lisaa_lukija(bussi244)
