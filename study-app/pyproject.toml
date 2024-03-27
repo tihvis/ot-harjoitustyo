@@ -13,6 +13,8 @@ python-dotenv = "^0.21.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest-dotenv = "^0.5.2"
+pytest = "^8.1.1"
+coverage = "^7.4.4"
 
 [build-system]
 requires = ["poetry-core"]
