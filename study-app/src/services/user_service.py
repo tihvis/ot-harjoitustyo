@@ -41,9 +41,9 @@ class UserService:
     def logout(self):
         self._user = None
 
-    def create_user(self, username, password, password2, login=True):
+    def create_user(self, username, password, password2):
         existing_user = self._user_repository.find_by_username(username)
-        
+
         if existing_user:
             raise UsernameExistsError
 
@@ -55,8 +55,7 @@ class UserService:
 
         user = self._user_repository.create(User(username, password))
 
-        if login:
-            self._user = user
+        self._user = user
 
         return user
 

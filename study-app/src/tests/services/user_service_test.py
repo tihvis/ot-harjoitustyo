@@ -13,13 +13,14 @@ class TestUserService(unittest.TestCase):
         user = user_service.create_user(self.username, self.password, self.password)
 
         self.assertEqual(user_service.get_current_user(), user)
-        
 
     def test_login_with_valid_username_and_password(self):
-        user = user_service.create_user(self.username, self.password, self.password)
-        user_service.login(self.username, self.password)
+        user = User(self.username, self.password)
+        user_repository.create(user)
 
-        self.assertEqual(user_service.get_current_user(), user)
+        result = user_service.login(self.username, self.password)
+
+        self.assertEqual(user, result)
 
     def test_login_with_invalid_username_and_valid_password(self):
         self.assertRaises(InvalidCredentialsError, lambda: user_service.login("testtest", self.password))
@@ -60,7 +61,7 @@ class TestUserService(unittest.TestCase):
         user1 = user_service.create_user(self.username, self.password, self.password)
         user2 = user_service.create_user("second_user", self.password, self.password)
         user3 = user_service.create_user("third_user", self.password, self.password)
-    
+
         self.assertEqual(len(user_service.get_users()), 3)
         self.assertEqual(user_service.get_users()[0], user1)
         self.assertEqual(user_service.get_users()[1], user2)
