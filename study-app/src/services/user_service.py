@@ -43,7 +43,7 @@ class UserService:
 
     def create_user(self, username, password, password2, login=True):
         existing_user = self._user_repository.find_by_username(username)
-
+        
         if existing_user:
             raise UsernameExistsError
 
@@ -51,8 +51,7 @@ class UserService:
             raise PasswordConfirmationError
 
         if not re.match(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])", password) or len(password)<8:
-            raise InvalidPasswordError("""Salasanassa tulee olla vähintään 8 merkkiä,
-            ja siinä tulee olla vähintään yksi iso kirjain numero.""")
+            raise InvalidPasswordError
 
         user = self._user_repository.create(User(username, password))
 
