@@ -5,3 +5,4 @@ Helsingin yliopiston kurssin *Ohjelmistotekniikka* harjoitustyö ja viikkotehtä
 - [Laskarit](laskarit/)
 - [Vaatimusmäärittely](/study-app/dokumentaatio/vaatimusmaarittely.md)
 - [Työaikakirjanpito](/study-app/dokumentaatio/tuntikirjanpito.md)
+- [Changelog](/study-app/dokumentaatio/changelog.md)
