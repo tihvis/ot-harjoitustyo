@@ -46,43 +46,43 @@ class AddCourseView:
         self._credits_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_task_fields(self):
-        exercise_label = ttk.Label(master=self._frame, text="Tehtävät")
+        exercise_label = ttk.Label(master=self._frame, text="Tehtävät:")
         self._exercise_entry = ttk.Entry(master=self._frame)
 
         exercise_label.grid(padx=5, pady=5, sticky=constants.W)
         self._exercise_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
-        ex_group_label = ttk.Label(master=self._frame, text="Laskuharjoitukset")
+        ex_group_label = ttk.Label(master=self._frame, text="Laskuharjoitukset:")
         self._ex_group_entry = ttk.Entry(master=self._frame)
 
         ex_group_label.grid(padx=5, pady=5, sticky=constants.W)
         self._ex_group_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
-        project_label = ttk.Label(master=self._frame, text="Harjoitustyö")
+        project_label = ttk.Label(master=self._frame, text="Harjoitustyö:")
         self._project_entry = ttk.Entry(master=self._frame)
 
         project_label.grid(padx=5, pady=5, sticky=constants.W)
         self._project_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
-        exam_label = ttk.Label(master=self._frame, text="Koe")
+        exam_label = ttk.Label(master=self._frame, text="Koe:")
         self._exam_entry = ttk.Entry(master=self._frame)
 
         exam_label.grid(padx=5, pady=5, sticky=constants.W)
         self._exam_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
-        peer_review_label = ttk.Label(master=self._frame, text="Vertais-/itsearviointi")
+        peer_review_label = ttk.Label(master=self._frame, text="Vertais-/itsearviointi:")
         self._peer_review_entry = ttk.Entry(master=self._frame)
 
         peer_review_label.grid(padx=5, pady=5, sticky=constants.W)
         self._peer_review_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
-        feedback_label = ttk.Label(master=self._frame, text="Kurssipalaute")
+        feedback_label = ttk.Label(master=self._frame, text="Kurssipalaute:")
         self._feedback_entry = ttk.Entry(master=self._frame)
 
         feedback_label.grid(padx=5, pady=5, sticky=constants.W)
         self._feedback_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
-        other_label = ttk.Label(master=self._frame, text="Muu")
+        other_label = ttk.Label(master=self._frame, text="Muu:")
         self._other_entry = ttk.Entry(master=self._frame)
 
         other_label.grid(padx=5, pady=5, sticky=constants.W)
