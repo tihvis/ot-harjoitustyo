@@ -1,5 +1,5 @@
 from tkinter import ttk, StringVar, constants
-from services.user_service import user_service, UsernameExistsError, PasswordConfirmationError, InvalidPasswordError
+from services.user_service import user_service, UsernameExistsError, PasswordConfirmationError, InvalidPasswordError, InvalidCredentialsError
 
 
 class CreateUserView:
@@ -27,20 +27,21 @@ class CreateUserView:
         password = self._password_entry.get()
         password2 = self._password2_entry.get()
 
-        if len(username) == 0 or len(password) == 0 or len(password2) == 0:
-            self._show_error("Täytä kaikki kentät.")
-            return
-
         try:
             user_service.create_user(username, password, password2)
             self._handle_create_user()
+
         except UsernameExistsError:
             self._show_error(f"Käyttäjätunnus {username} on varattu.")
+
+        except InvalidCredentialsError:
+            self._show_error("Käyttäjätunnuksen tulee olla 4-30 merkkiä pitkä, ja salasanan 8-30 merkkiä pitkä.")
+
         except PasswordConfirmationError:
             self._show_error("Syöttämäsi salasanat eivät vastanneet toisiaan.")
+
         except InvalidPasswordError:
-            self._show_error("Salasanassa tulee olla vähintään 8 merkkiä, \
-            ja siinä tulee olla vähintään yksi iso kirjain numero.")
+            self._show_error("Salasanassa tulee olla vähintään 8-30 merkkiä, ja siinä tulee olla vähintään yksi iso kirjain numero.")
 
     def _show_error(self, message):
         self._error_variable.set(message)
@@ -60,14 +61,14 @@ class CreateUserView:
     def _initialize_password_fields(self):
         password_label = ttk.Label(master=self._frame, text="Salasana")
 
-        self._password_entry = ttk.Entry(master=self._frame)
+        self._password_entry = ttk.Entry(master=self._frame, show="*")
 
         password_label.grid(padx=5, pady=5, sticky=constants.W)
         self._password_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
         password2_label = ttk.Label(master=self._frame, text="Salasana uudelleen")
 
-        self._password2_entry = ttk.Entry(master=self._frame)
+        self._password2_entry = ttk.Entry(master=self._frame, show="*")
 
         password2_label.grid(padx=5, pady=5, sticky=constants.W)
         self._password2_entry.grid(padx=5, pady=5, sticky=constants.EW)

@@ -34,7 +34,7 @@ class TestUserService(unittest.TestCase):
         self.assertRaises(UsernameExistsError, lambda: user_service.create_user("test", "Newpassw0rd", "Newpassw0rd"))
 
     def test_create_username_with_too_short_password(self):
-        self.assertRaises(InvalidPasswordError, lambda: user_service.create_user("username", "2Short", "2Short"))
+        self.assertRaises(InvalidCredentialsError, lambda: user_service.create_user("username", "2Short", "2Short"))
 
     def test_create_username_with_no_capital_letter_in_password(self):
         self.assertRaises(InvalidPasswordError, lambda: user_service.create_user("username", "nocapital2", "nocapital2"))
@@ -51,7 +51,7 @@ class TestUserService(unittest.TestCase):
         self.assertEqual(user_service.get_current_user(), user)
 
     def test_logout(self):
-        user = user_service.create_user(self.username, self.password, self.password)
+        user_service.create_user(self.username, self.password, self.password)
 
         user_service.logout()
 

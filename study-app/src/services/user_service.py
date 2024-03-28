@@ -47,10 +47,13 @@ class UserService:
         if existing_user:
             raise UsernameExistsError
 
+        if len(username) < 4 or len(username) > 30 or len(password) < 8 or len(password) > 30:
+            raise InvalidCredentialsError
+
         if password != password2:
             raise PasswordConfirmationError
 
-        if not re.match(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])", password) or len(password)<8:
+        if not re.match(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])", password):
             raise InvalidPasswordError
 
         user = self._user_repository.create(User(username, password))
