@@ -45,8 +45,9 @@ class CourseListView:
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
 
-        for course in self._courses:
-            self._initialize_course_item(course)
+        if self._courses:
+            for course in self._courses:
+                self._initialize_course_item(course)
 
 
 class CourseView:

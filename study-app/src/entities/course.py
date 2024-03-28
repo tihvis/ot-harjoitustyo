@@ -1,6 +1,6 @@
 class Course:
-    def __init__(self, user, name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other, done=False, grade=None, completion_date=None):
-        self.user = user
+    def __init__(self, user_id, name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other, done=False, grade=None, completion_date=None):
+        self.user_id = user_id
         self.name = name
         self.credits = credits
         self.exercises = exercises

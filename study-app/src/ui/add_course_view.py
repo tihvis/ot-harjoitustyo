@@ -99,12 +99,9 @@ class AddCourseView:
         feedback = self._feedback_entry.get()
         other = self._other_entry.get()
 
-        try:
-            course_service.create_course(name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other)
-            self._handle_return()
-
-        except:
-            pass
+        # tähän try except, missä tarkistetaan onko syötteet ok
+        course_service.create_course(name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other)
+        self._handle_return()
 
 
     def _delete_course_handler(self):

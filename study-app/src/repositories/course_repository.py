@@ -13,8 +13,8 @@ class CourseRepository:
         cursor = self._connection.cursor()
 
         cursor.execute(
-            "insert into courses (user, name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other, done, grade, completion_date) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            (course.user, course.name, course.credits, course.exercises, course.exercise_group, course.project, course.exam, course.peer_view, course.feedback, course.other, course.done, course.grade, course.completion_date)
+            "insert into courses (user_id, name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other, done, grade, completion_date) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (course.user_id, course.name, course.credits, course.exercises, course.exercise_group, course.project, course.exam, course.peer_review, course.feedback, course.other, course.done, course.grade, course.completion_date)
         )
 
         self._connection.commit()

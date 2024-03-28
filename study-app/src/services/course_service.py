@@ -19,14 +19,14 @@ class CourseService:
         self._user_repository = user_repository
 
     def create_course(self, name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other):
-        user = user_service.get_current_user[0]
-        if self.values_ok(name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other):
-            course = self._course_repository.create(Course(user=user, name=name, credits=credits, exercises=exercises, exercise_group=exercise_group, project=project, exam=exam, peer_review=peer_review, feedback=feedback, other=other))
+        user_id = user_service.get_current_user().user_id
+        #if self.values_ok(name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other):
+        course = self._course_repository.create(Course(user_id=user_id, name=name, credits=credits, exercises=exercises, exercise_group=exercise_group, project=project, exam=exam, peer_review=peer_review, feedback=feedback, other=other))
 
-            return course
+        return course
 
-        else:
-            raise InvalidValuesError
+        # else:
+        #     raise InvalidValuesError
 
     def get_courses(self):
         pass
