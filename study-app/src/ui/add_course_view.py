@@ -1,5 +1,5 @@
 from tkinter import ttk, StringVar, constants
-from services.course_service import course_service
+from services.course_service import course_service, InvalidValuesError
 
 class AddCourseView:
     def __init__(self, root, handle_return):
@@ -99,9 +99,12 @@ class AddCourseView:
         feedback = self._feedback_entry.get()
         other = self._other_entry.get()
 
-        # tähän try except, missä tarkistetaan onko syötteet ok
-        course_service.create_course(name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other)
-        self._handle_return()
+        try:
+            course_service.create_course(name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other)
+            self._handle_return()
+
+        except InvalidValuesError:
+            self._show_error("Kurssin nimen tulisi olla 1-50 merkkiä pitkä ja opintopisteiden 0-50. Muut arvot voivat olla välillä 0-100.")
 
 
     def _delete_course_handler(self):

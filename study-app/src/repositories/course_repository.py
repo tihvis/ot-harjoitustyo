@@ -24,7 +24,7 @@ class CourseRepository:
     def set_done(self, course_id, done=True):
         pass
 
-    def delete(self, course_id):
+    def delete_course(self, course_id):
         pass
 
 course_repository = CourseRepository(get_database_connection())
