@@ -15,8 +15,7 @@ class TestUserService(unittest.TestCase):
         self.assertEqual(user_service.get_current_user(), user)
 
     def test_login_with_valid_username_and_password(self):
-        user = User(self.username, self.password)
-        user_repository.create(user)
+        user = user_service.create_user(self.username, self.password, self.password)
 
         result = user_service.login(self.username, self.password)
 
@@ -62,7 +61,9 @@ class TestUserService(unittest.TestCase):
         user2 = user_service.create_user("second_user", self.password, self.password)
         user3 = user_service.create_user("third_user", self.password, self.password)
 
-        self.assertEqual(len(user_service.get_users()), 3)
-        self.assertEqual(user_service.get_users()[0], user1)
-        self.assertEqual(user_service.get_users()[1], user2)
-        self.assertEqual(user_service.get_users()[2], user3)
+        users = user_service.get_users()
+
+        self.assertEqual(len(users), 3)
+        self.assertEqual(users[0], user1)
+        self.assertEqual(users[1], user2)
+        self.assertEqual(users[2], user3)
