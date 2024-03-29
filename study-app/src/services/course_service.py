@@ -24,7 +24,7 @@ class CourseService:
             course = self._course_repository.create(Course(user_id=user_id, name=name, credits=credits, exercises=exercises, exercise_group=exercise_group, project=project, exam=exam, peer_review=peer_review, feedback=feedback, other=other))
 
             return course
-
+        
         else:
             raise InvalidValuesError
 
@@ -34,22 +34,23 @@ class CourseService:
     def values_ok(self, name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other):
         if not isinstance(name, str) or len(name) < 1 or len(name) > 50:
             return False
-        if not isinstance(credits, int) or credits < 0 or credits > 50:
+        if credits < 0 or credits > 50:
             return False
-        if not isinstance(exercises, int) or exercises > 100:
+        if exercises < 0 or exercises > 100:
             return False
-        if not isinstance(exercise_group, int) or exercise_group > 100:
+        if exercise_group < 0 or exercise_group > 100:
             return False
-        if not isinstance(project, int) or project > 100:
+        if project < 0 or project > 100:
             return False
-        if not isinstance(exam, int) or exam > 100:
+        if exam < 0 or exam > 100:
             return False
-        if not isinstance(peer_review, int) or peer_review > 100:
+        if peer_review < 0 or peer_review > 100:
             return False
-        if not isinstance(feedback, int) or feedback > 100:
+        if feedback < 0 or feedback > 100:
             return False
-        if not isinstance(other, int) or other > 100:
+        if other < 0 or other > 100:
             return False
-        return True
+        else:
+            return True
 
 course_service = CourseService()

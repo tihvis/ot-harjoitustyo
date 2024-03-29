@@ -89,22 +89,24 @@ class AddCourseView:
         self._other_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _save_handler(self):
-        name = self._name_entry.get()
-        credits = self._credits_entry.get()
-        exercises = self._exercise_entry.get()
-        exercise_group = self._ex_group_entry.get()
-        project = self._project_entry.get()
-        exam = self._exam_entry.get()
-        peer_review = self._peer_review_entry.get()
-        feedback = self._feedback_entry.get()
-        other = self._other_entry.get()
-
         try:
+            name = self._name_entry.get()
+            credits = int(self._credits_entry.get())
+            exercises = int(self._exercise_entry.get())
+            exercise_group = int(self._ex_group_entry.get())
+            project = int(self._project_entry.get())
+            exam = int(self._exam_entry.get())
+            peer_review = int(self._peer_review_entry.get())
+            feedback = int(self._feedback_entry.get())
+            other = int(self._other_entry.get())
             course_service.create_course(name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other)
             self._handle_return()
 
+        except ValueError:
+            self._show_error("Opintopisteiden ja tehtävien määrän tulee olla kokonaislukuja.")
+
         except InvalidValuesError:
-            self._show_error("Kurssin nimen tulisi olla 1-50 merkkiä pitkä ja opintopisteiden 0-50. Muut arvot voivat olla välillä 0-100.")
+            self._show_error("Kurssin nimen tulisi olla 1-50 merkkiä pitkä ja opintopisteiden kokonaislukuja välillä 0-50. Muut arvot voivat olla kokonaislukuja välillä 0-100.")
 
 
     def _delete_course_handler(self):
