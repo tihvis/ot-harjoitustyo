@@ -13,3 +13,4 @@ class Course:
         self.done = done
         self.grade = grade
         self.completion_date = completion_date
+

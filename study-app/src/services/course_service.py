@@ -29,7 +29,7 @@ class CourseService:
             raise InvalidValuesError
 
     def get_courses(self):
-        pass
+        return self._course_repository.find_all()
 
     def values_ok(self, name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other):
         if not isinstance(name, str) or len(name) < 1 or len(name) > 50:
