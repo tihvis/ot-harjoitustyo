@@ -1,8 +1,10 @@
 from entities.user import User
 from database_connection import get_database_connection
 
+
 def get_user_by_row(row):
     return User(row["username"], row["password"]) if row else None
+
 
 class UserRepository:
     def __init__(self, connection):
@@ -28,7 +30,7 @@ class UserRepository:
         row = cursor.fetchone()
 
         return get_user_by_row(row)
-    
+
     def create(self, user):
         cursor = self._connection.cursor()
 

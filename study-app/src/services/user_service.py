@@ -5,17 +5,22 @@ from repositories.user_repository import (
     user_repository as default_user_repository
 )
 
+
 class InvalidCredentialsError(Exception):
     pass
+
 
 class UsernameExistsError(Exception):
     pass
 
+
 class PasswordConfirmationError(Exception):
     pass
 
+
 class InvalidPasswordError(Exception):
     pass
+
 
 class UserService:
     def __init__(self, user_repository=default_user_repository):
@@ -61,5 +66,6 @@ class UserService:
         self._user = user
 
         return user
+
 
 user_service = UserService()

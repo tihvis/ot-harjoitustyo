@@ -1,6 +1,7 @@
 from tkinter import ttk, StringVar, constants
 from services.course_service import course_service, InvalidValuesError
 
+
 class AddCourseView:
     def __init__(self, root, handle_return):
         self._root = root
@@ -52,7 +53,8 @@ class AddCourseView:
         exercise_label.grid(padx=5, pady=5, sticky=constants.W)
         self._exercise_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
-        ex_group_label = ttk.Label(master=self._frame, text="Laskuharjoitukset:")
+        ex_group_label = ttk.Label(
+            master=self._frame, text="Laskuharjoitukset:")
         self._ex_group_entry = ttk.Entry(master=self._frame)
 
         ex_group_label.grid(padx=5, pady=5, sticky=constants.W)
@@ -70,7 +72,8 @@ class AddCourseView:
         exam_label.grid(padx=5, pady=5, sticky=constants.W)
         self._exam_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
-        peer_review_label = ttk.Label(master=self._frame, text="Vertais-/itsearviointi:")
+        peer_review_label = ttk.Label(
+            master=self._frame, text="Vertais-/itsearviointi:")
         self._peer_review_entry = ttk.Entry(master=self._frame)
 
         peer_review_label.grid(padx=5, pady=5, sticky=constants.W)
@@ -99,15 +102,17 @@ class AddCourseView:
             peer_review = int(self._peer_review_entry.get())
             feedback = int(self._feedback_entry.get())
             other = int(self._other_entry.get())
-            course_service.create_course(name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other)
+            course_service.create_course(
+                name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other)
             self._handle_return()
 
         except ValueError:
-            self._show_error("Opintopisteiden ja tehtävien määrän tulee olla kokonaislukuja.")
+            self._show_error(
+                "Opintopisteiden ja tehtävien määrän tulee olla kokonaislukuja.")
 
         except InvalidValuesError:
-            self._show_error("Kurssin nimen tulisi olla 1-50 merkkiä pitkä ja opintopisteiden kokonaislukuja välillä 0-50. Muut arvot voivat olla kokonaislukuja välillä 0-100.")
-
+            self._show_error(
+                "Kurssin nimen tulisi olla 1-50 merkkiä pitkä ja opintopisteiden kokonaislukuja välillä 0-50. Muut arvot voivat olla kokonaislukuja välillä 0-100.")
 
     def _delete_course_handler(self):
         pass

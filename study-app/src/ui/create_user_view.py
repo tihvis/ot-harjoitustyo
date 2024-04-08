@@ -35,13 +35,15 @@ class CreateUserView:
             self._show_error(f"Käyttäjätunnus {username} on varattu.")
 
         except InvalidCredentialsError:
-            self._show_error("Käyttäjätunnuksen tulee olla 4-30 merkkiä pitkä, ja salasanan 8-30 merkkiä pitkä.")
+            self._show_error(
+                "Käyttäjätunnuksen tulee olla 4-30 merkkiä pitkä, ja salasanan 8-30 merkkiä pitkä.")
 
         except PasswordConfirmationError:
             self._show_error("Syöttämäsi salasanat eivät vastanneet toisiaan.")
 
         except InvalidPasswordError:
-            self._show_error("Salasanassa tulee olla vähintään 8-30 merkkiä, ja siinä tulee olla vähintään yksi iso kirjain numero.")
+            self._show_error(
+                "Salasanassa tulee olla vähintään 8-30 merkkiä, ja siinä tulee olla vähintään yksi iso kirjain numero.")
 
     def _show_error(self, message):
         self._error_variable.set(message)
@@ -66,7 +68,8 @@ class CreateUserView:
         password_label.grid(padx=5, pady=5, sticky=constants.W)
         self._password_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
-        password2_label = ttk.Label(master=self._frame, text="Salasana uudelleen")
+        password2_label = ttk.Label(
+            master=self._frame, text="Salasana uudelleen")
 
         self._password2_entry = ttk.Entry(master=self._frame, show="*")
 

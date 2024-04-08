@@ -2,7 +2,8 @@ from tkinter import ttk, constants
 from services.user_service import user_service
 from services.course_service import course_service
 # täydennä allaoleva import
-#from ui.course_page_view import 
+# from ui.course_page_view import
+
 
 class CourseListView:
     def __init__(self, root, courses, handle_show_course_page):
@@ -84,9 +85,10 @@ class CourseView:
         if self._course_list_view:
             self._course_list_view.destroy()
 
-        courses = course_service.get_courses() 
+        courses = course_service.get_courses()
 
-        self._course_list_view = CourseListView(self._course_list_frame, courses, self._handle_show_course_page)
+        self._course_list_view = CourseListView(
+            self._course_list_frame, courses, self._handle_show_course_page)
 
         self._course_list_view.pack()
 
@@ -166,4 +168,3 @@ class CourseView:
         self._frame.grid_columnconfigure(0, weight=1)
         self._frame.grid_columnconfigure(1, weight=1)
         self._frame.grid_columnconfigure(2, weight=1)
-

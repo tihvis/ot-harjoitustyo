@@ -1,8 +1,10 @@
 from entities.course import Course
 from database_connection import get_database_connection
 
+
 def get_courses_by_row(row):
     return Course(row["user_id"], row["name"], row["credits"], row["exercises"], row["exercise_group"], row["project"], row["exam"], row["peer_review"], row["feedback"], row["other"]) if row else None
+
 
 class CourseRepository:
     def __init__(self, connection):
@@ -25,7 +27,8 @@ class CourseRepository:
 
         cursor.execute(
             "insert into courses (user_id, name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other, done, grade, completion_date) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            (course.user_id, course.name, course.credits, course.exercises, course.exercise_group, course.project, course.exam, course.peer_review, course.feedback, course.other, course.done, course.grade, course.completion_date)
+            (course.user_id, course.name, course.credits, course.exercises, course.exercise_group, course.project,
+             course.exam, course.peer_review, course.feedback, course.other, course.done, course.grade, course.completion_date)
         )
 
         self._connection.commit()
@@ -44,5 +47,6 @@ class CourseRepository:
         cursor.execute("delete from courses")
 
         self._connection.commit()
+
 
 course_repository = CourseRepository(get_database_connection())
