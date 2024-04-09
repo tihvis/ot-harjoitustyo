@@ -3,7 +3,7 @@ from database_connection import get_database_connection
 
 
 def get_user_by_row(row):
-    return User(row["username"], row["password"]) if row else None
+    return User(row["username"], row["password"], row["user_id"]) if row else None
 
 
 class UserRepository:
@@ -27,9 +27,9 @@ class UserRepository:
             (username,)
         )
 
-        row = cursor.fetchone()
+        user = cursor.fetchone()
 
-        return get_user_by_row(row)
+        return User(user[1], user[2], user[0]) if user else None
 
     def create(self, user):
         cursor = self._connection.cursor()
@@ -39,9 +39,11 @@ class UserRepository:
             (user.username, user.password)
         )
 
+        user_id = cursor.lastrowid
+
         self._connection.commit()
 
-        return user
+        return User(user.username, user.password, user_id)
 
     def delete_all(self):
         cursor = self._connection.cursor()

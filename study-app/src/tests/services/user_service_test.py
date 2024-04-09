@@ -22,7 +22,8 @@ class TestUserService(unittest.TestCase):
 
         result = user_service.login(self.username, self.password)
 
-        self.assertEqual(user, result)
+        self.assertEqual(user.username, result.username)
+        self.assertEqual(user.password, result.password)
 
     def test_login_with_invalid_username_and_valid_password(self):
         self.assertRaises(InvalidCredentialsError,
@@ -78,6 +79,6 @@ class TestUserService(unittest.TestCase):
         users = user_service.get_users()
 
         self.assertEqual(len(users), 3)
-        self.assertEqual(users[0], user1)
-        self.assertEqual(users[1], user2)
-        self.assertEqual(users[2], user3)
+        self.assertEqual(users[0].username, user1.username)
+        self.assertEqual(users[1].username, user2.username)
+        self.assertEqual(users[2].username, user3.username)
