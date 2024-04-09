@@ -1,17 +1,22 @@
 from tkinter import ttk, StringVar, constants
 from services.course_service import course_service, InvalidValuesError
+from services.user_service import user_service
 
 
 class AddCourseView:
     def __init__(self, root, handle_return):
         self._root = root
+        self._user = user_service.get_current_user()
         self._handle_return = handle_return
         self._frame = None
         self._name_entry = None
         self._credits_entry = None
         self._exercises_entry = None
         self._ex_group_entry = None
-        self._prject_entry = None
+        self._project_entry = None
+        self._peer_review_entry = None
+        self._feedback_entry = None
+        self._other_entry = None
         self._exam_entry = None
         self._grade_entry = None
         self._comp_date_entry = None
@@ -48,10 +53,10 @@ class AddCourseView:
 
     def _initialize_task_fields(self):
         exercise_label = ttk.Label(master=self._frame, text="Tehtävät:")
-        self._exercise_entry = ttk.Entry(master=self._frame)
+        self._exercises_entry = ttk.Entry(master=self._frame)
 
         exercise_label.grid(padx=5, pady=5, sticky=constants.W)
-        self._exercise_entry.grid(padx=5, pady=5, sticky=constants.EW)
+        self._exercises_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
         ex_group_label = ttk.Label(
             master=self._frame, text="Laskuharjoitukset:")
@@ -93,9 +98,10 @@ class AddCourseView:
 
     def _save_handler(self):
         try:
+            user = self._user.user_id
             name = self._name_entry.get()
             credits = int(self._credits_entry.get())
-            exercises = int(self._exercise_entry.get())
+            exercises = int(self._exercises_entry.get())
             exercise_group = int(self._ex_group_entry.get())
             project = int(self._project_entry.get())
             exam = int(self._exam_entry.get())
@@ -103,7 +109,7 @@ class AddCourseView:
             feedback = int(self._feedback_entry.get())
             other = int(self._other_entry.get())
             course_service.create_course(
-                name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other)
+                user, name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other)
             self._handle_return()
 
         except ValueError:

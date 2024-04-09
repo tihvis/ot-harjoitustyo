@@ -1,12 +1,10 @@
 from tkinter import ttk, constants
 from services.user_service import user_service
 from services.course_service import course_service
-# täydennä allaoleva import
-# from ui.course_page_view import
 
 
 class CourseListView:
-    def __init__(self, root, courses, handle_show_course_page):
+    def __init__(self, root, handle_show_course_page, courses=None):
         self._root = root
         self._courses = courses
         self._handle_show_course_page = handle_show_course_page
@@ -27,7 +25,7 @@ class CourseListView:
         show_course_button = ttk.Button(
             master=item_frame,
             text="Näytä/muokkaa",
-            command=self._handle_show_course_page()
+            command=self._handle_show_course_page(course)
         )
 
         label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
@@ -85,10 +83,10 @@ class CourseView:
         if self._course_list_view:
             self._course_list_view.destroy()
 
-        courses = course_service.get_courses()
+        courses = course_service.get_courses_by_user_id(self._user.user_id)
 
         self._course_list_view = CourseListView(
-            self._course_list_frame, courses, self._handle_show_course_page)
+            self._course_list_frame, self._handle_show_course_page, courses)
 
         self._course_list_view.pack()
 

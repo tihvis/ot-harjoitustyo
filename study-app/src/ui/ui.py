@@ -2,7 +2,7 @@ from ui.login_view import LoginView
 from ui.main_view import CourseView
 from ui.create_user_view import CreateUserView
 from ui.add_course_view import AddCourseView
-# from ui.course_page_view import CoursePageView
+from ui.course_page_view import CoursePageView
 # from ui.completed_view import CompletedView
 
 
@@ -51,10 +51,11 @@ class UI:
 
         self._current_view.pack()
 
-    def _show_course_page_view(self):
+    def _show_course_page_view(self, course=None):
         self._hide_current_view()
 
-        self._current_view = CoursePageView()  # tähän attribuutit
+        self._current_view = CoursePageView(
+            self._root, course, self._show_course_view)
 
         self._current_view.pack()
 
