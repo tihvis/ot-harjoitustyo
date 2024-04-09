@@ -6,4 +6,5 @@
 | 27.3. | 8    | sovelluksen runko, kirjautuminen ja ensimmäiset yksikkötestit |
 | 28.3. | 8    | kurssin lisääminen tietokantaan, syötteiden tarkistukset, lisää yksikkötestejä|
 | 29.3. | 3    | kurssin lisäämisen yksikkötestejä ja bugifiksauksia|
-| yht.  | 23   | | 
+| 9.4. | 5    | korjattu bugeja metodeissa ja tiedonvälityksessä luokasta toiseen, ja aloitettu meneillään olevien kurssien näkymää |
+| yht.  | 28   | | 
