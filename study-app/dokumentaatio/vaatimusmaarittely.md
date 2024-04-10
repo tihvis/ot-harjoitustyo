@@ -39,16 +39,16 @@ Sovellus aukeaa kirjautumisnäkymään.
 
 ### Ennen kirjautumista
 
-- Käyttäjä voi luoda järjestelmään käyttäjätunnuksen.
+- Käyttäjä voi luoda järjestelmään käyttäjätunnuksen. :white_check_mark:
   - Käyttäjätunnuksen täytyy olla uniikki ja pituudeltaan vähintään 4 merkkiä.
   - Salasanan tulee olla vähintään 8 merkkiä pitkä, sisältäen vähintään yhden ison kirjaimen ja yhden numeron.
-- Käyttäjä voi kirjautua järjestelmään.
+- Käyttäjä voi kirjautua järjestelmään. :white_check_mark:
   - Kirjautuminen onnistuu olemassaolevalla käyttäjätunnuksella ja salasanalla.
   - Jos käyttäjää ei olemassa, tai syötetty salasana on väärin, käyttäjälle tulee tästä virheilmoitus.
 
 ### Kirjautumisen jälkeen
 
-- Käyttäjä voi lisätä uuden oman suoritetun/käynnissä olevan kurssin järjestelmään.
+- Käyttäjä voi lisätä uuden oman suoritetun/käynnissä olevan kurssin järjestelmään. :white_check_mark:
   - Kurssin tietoihin saa tallennettua kurssin nimen, opintopistemäärän, sekä tiedot siitä, mistä eri osa-alueista (esim. tehtävät/harjoitustyö/koe/vertaisarviot, yms) kurssin suoritus koostuu.
   - Käyttäjä saa lisättyä jokaisen osa-alueen kohdalle niiden tuomat maksimipisteet.
 
@@ -61,6 +61,8 @@ Sovellus aukeaa kirjautumisnäkymään.
   - Listauksessa näkyy montako kurssia ja opintopistettä tähän asti on suoritettu, ja mikä suoritettujen kurssien keskiarvo on.
   - Listauksessa näkyy lisäksi suoritettujen kurssien nimet, suorituspäivät, opintopisteet ja arvosana.
   - Listalla olevien suoritettujen kurssien tietoja pääsee muokkaamaan. Tämä on hyödyllistä, jos käyttäjä haluaa esimerkiksi myöhemmin uusia kurssin kokeen ja korottaa sen arvosanaa.
+
+- Käyttäjä voi kirjautua ulos. :white_check_mark:
 
 ## Jatkokehitysideoita
 
