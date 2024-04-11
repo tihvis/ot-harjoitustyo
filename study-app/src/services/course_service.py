@@ -12,18 +12,16 @@ class InvalidValuesError(Exception):
 
 
 class CourseService:
-    def __init__(
-        self,
-        course_repository=default_course_repository,
-        user_repository=default_user_repository
-    ):
+    def __init__(self, course_repository=default_course_repository,
+                user_repository=default_user_repository):
         self._user = None
         self._course_repository = course_repository
         self._user_repository = user_repository
 
-    def create_course(self, user_id, name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other):
-        if self.values_ok(name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other):
-            course = self._course_repository.create(Course(user_id=user_id, name=name, credits=credits, exercises=exercises, exercise_group=exercise_group, project=project, exam=exam, peer_review=peer_review, feedback=feedback, other=other))
+    def create_course(self, user_id, name, ects_credits, points):
+        if self.values_ok(name, ects_credits, points):
+            course = self._course_repository.create(Course(
+                    user_id=user_id, name=name, ects_credits=ects_credits, points=points))
 
             return course
 
@@ -38,25 +36,14 @@ class CourseService:
     def delete_course(self, course_id):
         self._course_repository.delete_course(course_id)
 
-    def values_ok(self, name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other):
+    def values_ok(self, name, ects_credits, points):
         if not isinstance(name, str) or len(name) < 1 or len(name) > 50:
             return False
-        if credits < 0 or credits > 50:
+        if ects_credits < 0 or ects_credits > 50:
             return False
-        if exercises < 0 or exercises > 100:
-            return False
-        if exercise_group < 0 or exercise_group > 100:
-            return False
-        if project < 0 or project > 100:
-            return False
-        if exam < 0 or exam > 100:
-            return False
-        if peer_review < 0 or peer_review > 100:
-            return False
-        if feedback < 0 or feedback > 100:
-            return False
-        if other < 0 or other > 100:
-            return False
+        for task in points:
+            if points[task] < 0 or points[task] > 100:
+                return False
         return True
 
 

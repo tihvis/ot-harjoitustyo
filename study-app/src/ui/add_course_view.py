@@ -10,7 +10,7 @@ class AddCourseView:
         self._handle_return = handle_return
         self._frame = None
         self._name_entry = None
-        self._credits_entry = None
+        self._ects_credits_entry = None
         self._exercises_entry = None
         self._ex_group_entry = None
         self._project_entry = None
@@ -45,11 +45,11 @@ class AddCourseView:
         name_label.grid(padx=5, pady=5, sticky=constants.W)
         self._name_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
-        credits_label = ttk.Label(master=self._frame, text="Opintopisteet:")
-        self._credits_entry = ttk.Entry(master=self._frame)
+        ects_credits_label = ttk.Label(master=self._frame, text="Opintopisteet:")
+        self._ects_credits_entry = ttk.Entry(master=self._frame)
 
-        credits_label.grid(padx=5, pady=5, sticky=constants.W)
-        self._credits_entry.grid(padx=5, pady=5, sticky=constants.EW)
+        ects_credits_label.grid(padx=5, pady=5, sticky=constants.W)
+        self._ects_credits_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_task_fields(self):
         exercise_label = ttk.Label(master=self._frame, text="Tehtävät:")
@@ -97,19 +97,22 @@ class AddCourseView:
         self._other_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _save_handler(self):
+        points = {}
         try:
-            user = self._user.user_id
+            user_id = self._user.user_id
             name = self._name_entry.get()
-            credits = int(self._credits_entry.get())
-            exercises = int(self._exercises_entry.get())
-            exercise_group = int(self._ex_group_entry.get())
-            project = int(self._project_entry.get())
-            exam = int(self._exam_entry.get())
-            peer_review = int(self._peer_review_entry.get())
-            feedback = int(self._feedback_entry.get())
-            other = int(self._other_entry.get())
-            course_service.create_course(
-                user, name, credits, exercises, exercise_group, project, exam, peer_review, feedback, other)
+            ects_credits = int(self._ects_credits_entry.get())
+
+            points["exercises"] = int(self._exercises_entry.get()) if not None else 0
+            points["exercise_group"] = int(self._ex_group_entry.get()) if not None else 0
+            points["project"] = int(self._project_entry.get()) if not None else 0
+            points["exam"] = int(self._exam_entry.get()) if not None else 0
+            points["peer_review"] = int(self._peer_review_entry.get()) if not None else 0
+            points["feedback"] = int(self._feedback_entry.get()) if not None else 0
+            points["other"] = int(self._other_entry.get()) if not None else 0
+
+            course_service.create_course(user_id, name, ects_credits, points)
+
             self._handle_return()
 
         except ValueError:

@@ -40,7 +40,7 @@ def create_course_table(connection):
             course_id INTEGER PRIMARY KEY,
             user_id INTEGER,
             name TEXT,
-            credits INTEGER,
+            ects_credits INTEGER,
             exercises INTEGER,
             exercise_group INTEGER,
             project INTEGER,
