@@ -104,18 +104,26 @@ class AddCourseView:
             name = self._name_entry.get()
             ects_credits = int(self._ects_credits_entry.get())
 
-            points["exercises"] = int(
-                self._exercises_entry.get()) if not None else 0
-            points["exercise_group"] = int(
-                self._ex_group_entry.get()) if not None else 0
-            points["project"] = int(
-                self._project_entry.get()) if not None else 0
-            points["exam"] = int(self._exam_entry.get()) if not None else 0
-            points["peer_review"] = int(
-                self._peer_review_entry.get()) if not None else 0
-            points["feedback"] = int(
-                self._feedback_entry.get()) if not None else 0
-            points["other"] = int(self._other_entry.get()) if not None else 0
+            if points[1] not None:
+                points[1] = int(self._exercises_entry.get())
+
+            if points[2] not None:
+                points[2] = int(self._ex_group_entry.get())
+
+            if points[3] not None:
+                points[3] = int(self._project_entry.get())
+
+            if points[4] not None:
+                points[4] = int(self._exam_entry.get())
+
+            if points[5] not None:
+                points[5] = int(self._peer_review_entry.get())
+
+            if points[6] not None:
+                points[6] = int(self._feedback_entry.get())
+
+            if points[7] not None:
+                points[7] = int(self._other_entry.get())
 
             course_service.create_course(user_id, name, ects_credits, points)
 
