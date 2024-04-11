@@ -45,7 +45,8 @@ class AddCourseView:
         name_label.grid(padx=5, pady=5, sticky=constants.W)
         self._name_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
-        ects_credits_label = ttk.Label(master=self._frame, text="Opintopisteet:")
+        ects_credits_label = ttk.Label(
+            master=self._frame, text="Opintopisteet:")
         self._ects_credits_entry = ttk.Entry(master=self._frame)
 
         ects_credits_label.grid(padx=5, pady=5, sticky=constants.W)
@@ -103,12 +104,17 @@ class AddCourseView:
             name = self._name_entry.get()
             ects_credits = int(self._ects_credits_entry.get())
 
-            points["exercises"] = int(self._exercises_entry.get()) if not None else 0
-            points["exercise_group"] = int(self._ex_group_entry.get()) if not None else 0
-            points["project"] = int(self._project_entry.get()) if not None else 0
+            points["exercises"] = int(
+                self._exercises_entry.get()) if not None else 0
+            points["exercise_group"] = int(
+                self._ex_group_entry.get()) if not None else 0
+            points["project"] = int(
+                self._project_entry.get()) if not None else 0
             points["exam"] = int(self._exam_entry.get()) if not None else 0
-            points["peer_review"] = int(self._peer_review_entry.get()) if not None else 0
-            points["feedback"] = int(self._feedback_entry.get()) if not None else 0
+            points["peer_review"] = int(
+                self._peer_review_entry.get()) if not None else 0
+            points["feedback"] = int(
+                self._feedback_entry.get()) if not None else 0
             points["other"] = int(self._other_entry.get()) if not None else 0
 
             course_service.create_course(user_id, name, ects_credits, points)

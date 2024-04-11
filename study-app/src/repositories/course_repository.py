@@ -3,15 +3,15 @@ from database_connection import get_database_connection
 
 
 def get_courses_by_row(row):
-    points = {"exercises": row["exercises"], "exercise_group": \
-            row["exercise_group"], "project": row["project"], "exam": \
-            row["exam"], "peer_review": row["peer_review"], "feedback": \
-            row["feedback"], "other": row["other"]}
+    points = {"exercises": row["exercises"], "exercise_group":
+              row["exercise_group"], "project": row["project"], "exam":
+              row["exam"], "peer_review": row["peer_review"], "feedback":
+              row["feedback"], "other": row["other"]}
 
-    completion_info = {"done": row["done"], "grade": \
-                    row["grade"], "completion_date": row["completion_date"]}
+    completion_info = {"done": row["done"], "grade":
+                       row["grade"], "completion_date": row["completion_date"]}
 
-    return Course(row["user_id"], row["name"], row["ects_credits"], \
+    return Course(row["user_id"], row["name"], row["ects_credits"],
                   points, completion_info, row["course_id"]) if row else None
 
 
@@ -42,7 +42,8 @@ class CourseRepository:
 
         query = "INSERT INTO courses (user_id, name, ects_credits) VALUES (?, ?, ?)"
 
-        cursor.execute(query, (course.user_id, course.name, course.ects_credits))
+        cursor.execute(
+            query, (course.user_id, course.name, course.ects_credits))
 
         course_id = cursor.lastrowid
 

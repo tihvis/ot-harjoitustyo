@@ -13,7 +13,7 @@ class InvalidValuesError(Exception):
 
 class CourseService:
     def __init__(self, course_repository=default_course_repository,
-                user_repository=default_user_repository):
+                 user_repository=default_user_repository):
         self._user = None
         self._course_repository = course_repository
         self._user_repository = user_repository
@@ -21,7 +21,7 @@ class CourseService:
     def create_course(self, user_id, name, ects_credits, points):
         if self.values_ok(name, ects_credits, points):
             course = self._course_repository.create(Course(
-                    user_id=user_id, name=name, ects_credits=ects_credits, points=points))
+                user_id=user_id, name=name, ects_credits=ects_credits, points=points))
 
             return course
 
