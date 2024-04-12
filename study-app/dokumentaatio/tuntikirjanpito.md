@@ -7,4 +7,5 @@
 | 28.3. | 8    | kurssin lisääminen tietokantaan, syötteiden tarkistukset, lisää yksikkötestejä|
 | 29.3. | 3    | kurssin lisäämisen yksikkötestejä ja bugifiksauksia|
 | 9.4. | 5    | korjattu bugeja metodeissa ja tiedonvälityksessä luokasta toiseen, ja aloitettu meneillään olevien kurssien näkymää |
-| yht.  | 28   | | 
+| 12.4. | 4    | kurssisivun näkymä, kurssin poistaminen, ulkoasun yhtenäistäminen|
+| yht.  | 32   | | 
