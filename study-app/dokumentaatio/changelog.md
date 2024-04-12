@@ -11,3 +11,10 @@
 - Käyttäjä voi kirjautua ulos.
 - Käyttäjä voi lisätä uuden kurssin.
 - UserServicen ja CourseServicen yksikkötestaus suht hyvällä mallilla.
+
+## Viikko 4
+- Lisätty Pylint.
+- Testausta laajennettu course_servicen ja user_servicen osalta.
+- Etusivulle lisätty käynnissä olevien kurssien listaus ja "näytä/muokkaa" painikkeet.
+- Kurssisivun näkymä hyvällä mallilla (vielä puuttuu tähänastisten kurssipisteiden tieto).
+- Lisätty kurssin poistaminen ja siihen liittyvä vahvistusviesti.
