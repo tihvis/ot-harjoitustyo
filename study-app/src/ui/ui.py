@@ -28,11 +28,19 @@ class UI:
 
         self._current_view.pack()
 
+    def _show_add_course_view(self):
+        self._hide_current_view()
+
+        self._current_view = AddCourseView(
+            self._root, self._show_course_view)
+
+        self._current_view.pack()
+
     def _show_course_view(self):
         self._hide_current_view()
 
-        self._current_view = CourseView(self._root, self._show_login_view,
-                                        self._show_add_course_view, self._show_completed_view, self._show_course_page_view)
+        self._current_view = CourseView(
+            self._root, self._show_login_view, self._show_add_course_view, self._show_course_page_view)
 
         self._current_view.pack()
 
@@ -44,24 +52,17 @@ class UI:
 
         self._current_view.pack()
 
-    def _show_add_course_view(self):
-        self._hide_current_view()
-
-        self._current_view = AddCourseView(self._root, self._show_course_view)
-
-        self._current_view.pack()
-
     def _show_course_page_view(self, course=None):
         self._hide_current_view()
 
         self._current_view = CoursePageView(
-            self._root, course, self._show_course_view)
+            self._root, self._show_course_view, course)
 
         self._current_view.pack()
 
-    def _show_completed_view(self):
-        self._hide_current_view()
+    # def _show_completed_view(self):
+    #     self._hide_current_view()
 
-        self._current_view = CompletedView()  # tähän attribuutit
+    #     self._current_view = CompletedView()  # tähän attribuutit
 
-        self._current_view.pack()
+    #     self._current_view.pack()

@@ -9,8 +9,8 @@ class TestCourseService(unittest.TestCase):
     def setUp(self):
         course_repository.delete_all()
         user_repository.delete_all()
-        self.points = {"exercises": 30, "exercise_group": 10, "project": 25,
-                       "exam": 50, "peer_review": 7, "feedback": 1, "other": 0}
+        self.points = {1: 30, 2: 10, 3: 25,
+                       4: 50, 5: 7, 6: 1, 7: 0}
         self.user = user_service.create_user("test", "Test1234", "Test1234")
 
     def test_create_course_with_valid_values(self):
@@ -127,7 +127,7 @@ class TestCourseService(unittest.TestCase):
         self.assertEqual(courses[2].user_id, self.user.user_id)
         self.assertEqual(courses[2].name, c3.name)
 
-    def test_course_when_multiple_users(self):
+    def test_get_course_when_multiple_users(self):
         user2 = user_service.create_user("second", "Second1234", "Second1234")
         user3 = user_service.create_user("third", "Third1234", "Third1234")
 
@@ -149,3 +149,16 @@ class TestCourseService(unittest.TestCase):
         self.assertEqual(courses[1].name, c2.name)
         self.assertEqual(courses[2].user_id, user3.user_id)
         self.assertEqual(courses[2].name, c3.name)
+
+    def test_course_points_are_correct(self):
+        course = course_service.create_course(self.user.user_id,
+                                              "Ohjelmistotekniikka", 5, self.points)
+
+        self.assertEqual(course.points, self.points)
+
+    def test_missing_course_points_are_correct(self):
+        points = {1: 30, 3: 25, 4: 50}
+        course = course_service.create_course(self.user.user_id,
+                                              "Ohjelmistotekniikka", 5, points)
+
+        self.assertEqual(course.points, points)
