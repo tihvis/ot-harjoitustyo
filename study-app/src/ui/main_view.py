@@ -20,7 +20,8 @@ class CourseListView:
 
     def _initialize_course_item(self, course):
         item_frame = ttk.Frame(master=self._frame)
-        label = ttk.Label(master=item_frame, text=f"{course.name}, {course.ects_credits} op")
+        label = ttk.Label(master=item_frame,
+                          text=f"{course.name}, {course.ects_credits} op")
 
         label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
 
@@ -46,6 +47,7 @@ class CourseListView:
 
         for course in self._courses:
             self._initialize_course_item(course)
+
 
 class CourseView:
     def __init__(self, root, handle_logout, handle_add_course, handle_show_course_page):
@@ -81,7 +83,7 @@ class CourseView:
 
     def _initialize_course_list(self):
         if self._course_list_view:
-             self._course_list_view.destroy()
+            self._course_list_view.destroy()
 
         courses = course_service.get_courses_by_user_id(self._user.user_id)
 
@@ -97,10 +99,10 @@ class CourseView:
         )
 
         user_label.grid(
-            row=1, 
-            column=0, 
-            padx=5, 
-            pady=5, 
+            row=1,
+            column=0,
+            padx=5,
+            pady=5,
             sticky=constants.EW)
 
         logout_button = ttk.Button(
@@ -110,8 +112,8 @@ class CourseView:
         )
 
         logout_button.grid(
-            row=2, 
-            column=0, 
+            row=2,
+            column=0,
             padx=5,
             pady=5,
             sticky=constants.EW
@@ -124,8 +126,8 @@ class CourseView:
         )
 
         add_course_button.grid(
-            row=3, 
-            column=0, 
+            row=3,
+            column=0,
             padx=5,
             pady=5,
             sticky=constants.EW

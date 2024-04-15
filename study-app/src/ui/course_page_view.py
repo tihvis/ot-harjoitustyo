@@ -4,7 +4,7 @@ from services.user_service import user_service
 
 
 class CoursePageView:
-    def __init__(self, root, handle_return, course = None):
+    def __init__(self, root, handle_return, course=None):
         self._root = root
         self._user = user_service.get_current_user()
         self._course = course
@@ -45,11 +45,11 @@ class CoursePageView:
         self._handle_return()
 
     def _confirm_deletion(self):
-        response = messagebox.askokcancel("Vahvista kurssin poistaminen", "Oletko varma että haluat poistaa kurssin? Paina 'OK' poistaaksesi kurssin, tai palaa kurssisivulle painamalla 'Cancel'.")
+        response = messagebox.askokcancel(
+            "Vahvista kurssin poistaminen", "Oletko varma että haluat poistaa kurssin? Paina 'OK' poistaaksesi kurssin, tai palaa kurssisivulle painamalla 'Cancel'.")
 
         if response:
             self._delete_course_handler()
-
 
     def _initialize_course_info(self):
         course_info_label = ttk.Label(
