@@ -162,3 +162,22 @@ class TestCourseService(unittest.TestCase):
                                               "Ohjelmistotekniikka", 5, points)
 
         self.assertEqual(course.points, points)
+
+    def test_get_course_by_userid(self):
+        course = course_service.create_course(self.user.user_id,
+                                              "Ohjelmistotekniikka", 5, self.points)
+
+        courses = course_service.get_courses_by_user_id(self.user.user_id)
+
+        self.assertEqual(len(courses), 1)
+        self.assertEqual(courses[0].name, course.name)
+
+    def test_delete_course_when_only_one_course(self):
+        course = course_service.create_course(self.user.user_id,
+                                              "Ohjelmistotekniikka", 5, self.points)
+
+        course_service.delete_course(course.course_id)
+
+        courses = course_service.get_courses()
+
+        self.assertEqual(len(courses), 0)
