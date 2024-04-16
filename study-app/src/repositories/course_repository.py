@@ -30,7 +30,7 @@ class CourseRepository:
         cursor = self._connection.cursor()
 
         cursor.execute(
-            "SELECT task_id, points FROM course_points WHERE course_id = ?", (course_id,))
+            "SELECT task_id, max_points FROM course_points WHERE course_id = ?", (course_id,))
 
         rows = cursor.fetchall()
 
@@ -57,7 +57,7 @@ class CourseRepository:
             points = self.get_course_points(course_id)
             completion = self.get_completion_info(course_id)
             result.append(Course(course["user_id"], course["name"],
-                          course["ects_credits"], points, completion, course_id))
+                                 course["ects_credits"], points, completion, course_id))
 
         return result
 
@@ -71,20 +71,60 @@ class CourseRepository:
 
         course_id = cursor.lastrowid
 
-        query = "INSERT INTO course_points (course_id, task_id, points) VALUES (?, ?, ?)"
+        query = "INSERT INTO course_points (course_id, task_id, " \
+                "max_points, completed_points) VALUES (?, ?, ?, ?)"
 
         for task_id in course.points:
-            cursor.execute(query, (course_id, task_id, course.points[task_id]))
-
-        self._connection.commit()
-
-        course.course_id = course_id
+            cursor.execute(query, (course_id, task_id,
+                           course.points[task_id], 0))
 
         self._connection.commit()
 
         course.course_id = course_id
 
         return course
+
+    def get_max_task_points(self, course_id, task_id):
+
+        cursor = self._connection.cursor()
+
+        cursor.execute(
+            "SELECT cp.max_points FROM course_points cp "
+            "JOIN tasks t ON cp.task_id = t.task_id WHERE t.task_id = ? "
+            "AND cp.course_id = ?", (task_id, course_id))
+
+        max_points = cursor.fetchone()
+
+        return max_points[0]
+
+    def get_completed_task_points(self, course_id, task_id):
+        cursor = self._connection.cursor()
+
+        cursor.execute(
+            "SELECT completed_points FROM course_points WHERE task_id = ? "
+            "AND course_id = ?", (task_id, course_id))
+
+        completed_points = cursor.fetchone()
+
+        return completed_points[0]
+
+    def get_task_ids(self):
+        cursor = self._connection.cursor()
+
+        cursor.execute("SELECT task_id FROM tasks")
+
+        task_ids = cursor.fetchall()
+
+        return [task_id[0] for task_id in task_ids]
+
+    def get_name_of_task(self, task_id):
+        cursor = self._connection.cursor()
+
+        cursor.execute("SELECT task FROM tasks WHERE task_id = ?", (task_id,))
+
+        task = cursor.fetchone()
+
+        return task[0]
 
     def set_done(self, course_id, done=True):
         pass

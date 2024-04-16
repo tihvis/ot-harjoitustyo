@@ -53,56 +53,29 @@ class CoursePageView:
 
     def _initialize_course_info(self):
         course_info_label = ttk.Label(
-            master=self._frame,
+            master=self._frame, font=("Arial", 15),
             text=f"{self._course.name}, {self._course.ects_credits} op"
         )
 
-        course_info_label.grid(padx=5, pady=5, sticky=constants.EW)
+        course_info_label.grid(row=1, columnspan=3, padx=10,
+                               pady=10, sticky=constants.EW)
 
     def _initialize_task_fields(self):
-        exercise_label = ttk.Label(master=self._frame, text="Tehtävät:")
-        self._exercises_entry = ttk.Entry(master=self._frame)
+        for i, task_id in enumerate(course_service.task_ids()):
+            task_name = ttk.Label(
+                master=self._frame, text=course_service.get_name_of_task(task_id) + ":")
 
-        exercise_label.grid(padx=5, pady=5, sticky=constants.W)
-        self._exercises_entry.grid(padx=5, pady=5, sticky=constants.W)
+            points_entry = ttk.Entry(master=self._frame)
 
-        ex_group_label = ttk.Label(
-            master=self._frame, text="Laskuharjoitukset:")
-        self._ex_group_entry = ttk.Entry(master=self._frame)
+            previous_points = ttk.Label(master=self._frame, text=course_service.get_completed_task_points(
+                self._course.course_id, task_id) + "/" + course_service.get_max_task_points(self._course.course_id, task_id) + "p")
 
-        ex_group_label.grid(padx=5, pady=5, sticky=constants.W)
-        self._ex_group_entry.grid(padx=5, pady=5, sticky=constants.W)
-
-        project_label = ttk.Label(master=self._frame, text="Harjoitustyö:")
-        self._project_entry = ttk.Entry(master=self._frame)
-
-        project_label.grid(padx=5, pady=5, sticky=constants.W)
-        self._project_entry.grid(padx=5, pady=5, sticky=constants.W)
-
-        exam_label = ttk.Label(master=self._frame, text="Koe:")
-        self._exam_entry = ttk.Entry(master=self._frame)
-
-        exam_label.grid(padx=5, pady=5, sticky=constants.W)
-        self._exam_entry.grid(padx=5, pady=5, sticky=constants.W)
-
-        peer_review_label = ttk.Label(
-            master=self._frame, text="Vertais-/itsearviointi:")
-        self._peer_review_entry = ttk.Entry(master=self._frame)
-
-        peer_review_label.grid(padx=5, pady=5, sticky=constants.W)
-        self._peer_review_entry.grid(padx=5, pady=5, sticky=constants.W)
-
-        feedback_label = ttk.Label(master=self._frame, text="Kurssipalaute:")
-        self._feedback_entry = ttk.Entry(master=self._frame)
-
-        feedback_label.grid(padx=5, pady=5, sticky=constants.W)
-        self._feedback_entry.grid(padx=5, pady=5, sticky=constants.W)
-
-        other_label = ttk.Label(master=self._frame, text="Muu:")
-        self._other_entry = ttk.Entry(master=self._frame)
-
-        other_label.grid(padx=5, pady=5, sticky=constants.W)
-        self._other_entry.grid(padx=5, pady=5, sticky=constants.W)
+            task_name.grid(row=i+2, column=0, padx=10,
+                           pady=5, sticky=constants.EW)
+            points_entry.grid(row=i+2, column=1, padx=10,
+                              pady=5, sticky=constants.EW)
+            previous_points.grid(row=i+2, column=2, padx=10,
+                                 pady=5, sticky=constants.EW)
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
@@ -115,14 +88,15 @@ class CoursePageView:
             foreground="red"
         )
 
-        self._error_label.grid(padx=5, pady=5)
+        self._error_label.grid(row=0, column=0, columnspan=3,
+                               padx=10, pady=5, sticky=constants.EW)
 
         self._initialize_course_info()
         self._initialize_task_fields()
 
         update_course_button = ttk.Button(
             master=self._frame,
-            text="Päivitä",
+            text="Tallenna muutokset (ei toimi vielä)",
             command=self._update_course_handler
         )
 
@@ -138,10 +112,14 @@ class CoursePageView:
             command=self._handle_return
         )
 
-        self._frame.grid_columnconfigure(0, weight=1, minsize=400)
+        self._frame.grid_columnconfigure(0, weight=1)
+        self._frame.grid_columnconfigure(1, weight=1)
+        self._frame.grid_columnconfigure(2, weight=1)
 
-        update_course_button.grid(padx=5, pady=5, sticky=constants.EW)
-        delete_course_button.grid(padx=5, pady=5, sticky=constants.EW)
-        return_button.grid(padx=5, pady=5, sticky=constants.EW)
+        update_course_button.grid(
+            column=1, padx=10, pady=5, sticky=constants.EW)
+        delete_course_button.grid(
+            column=1, padx=10, pady=5, sticky=constants.EW)
+        return_button.grid(column=1, padx=10, pady=5, sticky=constants.EW)
 
         self._hide_error()

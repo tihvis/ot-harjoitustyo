@@ -27,6 +27,16 @@ class CourseService:
 
         raise InvalidValuesError
 
+    def update_course(self, course_id, name, ects_credits, points):
+        pass
+        # if self.values_ok(name, ects_credits, points):
+        #     course = self._course_repository.update(Course(
+        #         course_id=course_id, name=name, ects_credits=ects_credits, points=points))
+
+        #     return course
+
+        # raise InvalidValuesError
+
     def get_courses(self):
         return self._course_repository.find_all()
 
@@ -35,6 +45,18 @@ class CourseService:
 
     def delete_course(self, course_id):
         self._course_repository.delete_course(course_id)
+
+    def task_ids(self):
+        return self._course_repository.get_task_ids()
+
+    def get_name_of_task(self, task_id):
+        return str(self._course_repository.get_name_of_task(task_id))
+
+    def get_max_task_points(self, course_id, task):
+        return str(self._course_repository.get_max_task_points(course_id, task))
+
+    def get_completed_task_points(self, course_id, task):
+        return str(self._course_repository.get_completed_task_points(course_id, task))
 
     def values_ok(self, name, ects_credits, points):
         if not isinstance(name, str) or len(name) < 1 or len(name) > 50:

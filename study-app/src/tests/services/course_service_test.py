@@ -181,3 +181,17 @@ class TestCourseService(unittest.TestCase):
         courses = course_service.get_courses()
 
         self.assertEqual(len(courses), 0)
+
+    def test_delete_course_when_multiple_courses(self):
+        course1 = course_service.create_course(self.user.user_id,
+                                               "Ohjelmistotekniikka", 5, self.points)
+
+        course2 = course_service.create_course(self.user.user_id,
+                                               "Tietorakenteet ja algoritmit", 10, self.points)
+
+        course_service.delete_course(course1.course_id)
+
+        courses = course_service.get_courses()
+
+        self.assertEqual(len(courses), 1)
+        self.assertEqual(courses[0].name, course2.name)

@@ -18,8 +18,6 @@ class AddCourseView:
         self._feedback_entry = None
         self._other_entry = None
         self._exam_entry = None
-        self._grade_entry = None
-        self._comp_date_entry = None
         self._error_variable = None
         self._error_label = None
 
@@ -98,34 +96,35 @@ class AddCourseView:
         self._other_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _save_handler(self):
-        points = {}
+        max_points = {}
         try:
             user_id = self._user.user_id
             name = self._name_entry.get()
             ects_credits = int(self._ects_credits_entry.get())
 
             if self._exercises_entry.get():
-                points[1] = int(self._exercises_entry.get())
+                max_points[1] = int(self._exercises_entry.get())
 
             if self._ex_group_entry.get():
-                points[2] = int(self._ex_group_entry.get())
+                max_points[2] = int(self._ex_group_entry.get())
 
             if self._project_entry.get():
-                points[3] = int(self._project_entry.get())
+                max_points[3] = int(self._project_entry.get())
 
             if self._exam_entry.get():
-                points[4] = int(self._exam_entry.get())
+                max_points[4] = int(self._exam_entry.get())
 
             if self._peer_review_entry.get():
-                points[5] = int(self._peer_review_entry.get())
+                max_points[5] = int(self._peer_review_entry.get())
 
             if self._feedback_entry.get():
-                points[6] = int(self._feedback_entry.get())
+                max_points[6] = int(self._feedback_entry.get())
 
             if self._other_entry.get():
-                points[7] = int(self._other_entry.get())
+                max_points[7] = int(self._other_entry.get())
 
-            course_service.create_course(user_id, name, ects_credits, points)
+            course_service.create_course(
+                user_id, name, ects_credits, max_points)
 
             self._handle_return()
 

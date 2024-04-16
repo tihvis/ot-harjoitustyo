@@ -23,7 +23,7 @@ class CourseListView:
         label = ttk.Label(master=item_frame,
                           text=f"{course.name}, {course.ects_credits} op")
 
-        label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
+        label.grid(row=0, column=0, padx=10, pady=5, sticky=constants.W)
 
         show_course_page_button = ttk.Button(
             master=item_frame,
@@ -34,7 +34,7 @@ class CourseListView:
         show_course_page_button.grid(
             row=0,
             column=1,
-            padx=5,
+            padx=10,
             pady=5,
             sticky=constants.EW
         )
@@ -49,7 +49,7 @@ class CourseListView:
             self._initialize_course_item(course)
 
 
-class CourseView:
+class MainView:
     def __init__(self, root, handle_logout, handle_add_course, handle_show_course_page):
         self._root = root
         self._handle_logout = handle_logout
@@ -81,6 +81,18 @@ class CourseView:
     # def _show_completed_handler(self):
     #     self._handle_show_completed()
 
+    def _initialize_header(self):
+        info_text = "Alla näet listauksen tällä hetkellä käynnissä olevista kursseistasi. Voit muokata kurssin tietoja tai merkitä kurssin suoritetuksi painamalla 'Näytä/muokkaa' -painiketta."
+
+        info = ttk.Label(master=self._frame, text=info_text, wraplength=400)
+
+        info.grid(
+            row=0,
+            column=0,
+            padx=10,
+            pady=10,
+            sticky=constants.EW)
+
     def _initialize_course_list(self):
         if self._course_list_view:
             self._course_list_view.destroy()
@@ -99,25 +111,11 @@ class CourseView:
         )
 
         user_label.grid(
-            row=1,
-            column=0,
-            padx=5,
-            pady=5,
-            sticky=constants.EW)
-
-        logout_button = ttk.Button(
-            master=self._frame,
-            text="Kirjaudu ulos",
-            command=self._logout_handler
-        )
-
-        logout_button.grid(
             row=2,
             column=0,
-            padx=5,
+            padx=10,
             pady=5,
-            sticky=constants.EW
-        )
+            sticky=constants.EW)
 
         add_course_button = ttk.Button(
             master=self._frame,
@@ -128,7 +126,20 @@ class CourseView:
         add_course_button.grid(
             row=3,
             column=0,
-            padx=5,
+            padx=10,
+            pady=5,
+            sticky=constants.EW
+        )
+        logout_button = ttk.Button(
+            master=self._frame,
+            text="Kirjaudu ulos",
+            command=self._logout_handler
+        )
+
+        logout_button.grid(
+            row=4,
+            column=0,
+            padx=10,
             pady=5,
             sticky=constants.EW
         )
@@ -140,9 +151,9 @@ class CourseView:
         # )
 
         # show_completed_button.grid(
-        #     row=4,
+        #     row=5,
         #     column=1,
-        #     padx=5,
+        #     padx=10,
         #     pady=5,
         #     sticky=constants.EW
         # )
@@ -151,11 +162,12 @@ class CourseView:
         self._frame = ttk.Frame(master=self._root)
         self._course_list_frame = ttk.Frame(master=self._frame)
 
+        self._initialize_header()
         self._initialize_course_list()
         self._initialize_footer()
 
         self._course_list_frame.grid(
-            row=0,
+            row=1,
             column=0,
             columnspan=2,
             sticky=constants.EW

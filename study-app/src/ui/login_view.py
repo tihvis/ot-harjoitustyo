@@ -38,21 +38,28 @@ class LoginView:
     def _hide_error(self):
         self._error_label.grid_remove()
 
+    def _initialize_header(self):
+        info_text = "Tervetuloa Sisukas-sovellukseen!\n\nSovelluksessa voit pitää kirjaa meneillään olevien kurssien etenemisestä, ja nähdä koosteen aiemmin suoritetuista kursseista.\n\nAloita kirjautumalla sisään tai luomalla uusi käyttäjätunnus."
+
+        info = ttk.Label(master=self._frame, text=info_text, wraplength=400)
+
+        info.grid(padx=10, pady=10, sticky=constants.EW)
+
     def _initialize_username_field(self):
-        username_label = ttk.Label(master=self._frame, text="Käyttäjätunnus")
+        username_label = ttk.Label(master=self._frame, text="Käyttäjätunnus:")
 
         self._username_entry = ttk.Entry(master=self._frame)
 
-        username_label.grid(padx=5, pady=5, sticky=constants.W)
-        self._username_entry.grid(padx=5, pady=5, sticky=constants.EW)
+        username_label.grid(padx=10, pady=10, sticky=constants.W)
+        self._username_entry.grid(padx=10, pady=5, sticky=constants.EW)
 
     def _initialize_password_field(self):
-        password_label = ttk.Label(master=self._frame, text="Salasana")
+        password_label = ttk.Label(master=self._frame, text="Salasana:")
 
         self._password_entry = ttk.Entry(master=self._frame, show="*")
 
-        password_label.grid(padx=5, pady=5, sticky=constants.W)
-        self._password_entry.grid(padx=5, pady=5, sticky=constants.EW)
+        password_label.grid(padx=10, pady=10, sticky=constants.W)
+        self._password_entry.grid(padx=10, pady=5, sticky=constants.EW)
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
@@ -65,8 +72,9 @@ class LoginView:
             foreground="red"
         )
 
-        self._error_label.grid(padx=5, pady=5)
+        self._error_label.grid(padx=10, pady=5)
 
+        self._initialize_header()
         self._initialize_username_field()
         self._initialize_password_field()
 
@@ -84,7 +92,7 @@ class LoginView:
 
         self._frame.grid_columnconfigure(0, weight=1, minsize=400)
 
-        login_button.grid(padx=5, pady=5, sticky=constants.EW)
-        create_user_button.grid(padx=5, pady=5, sticky=constants.EW)
+        login_button.grid(padx=10, pady=5, sticky=constants.EW)
+        create_user_button.grid(padx=10, pady=5, sticky=constants.EW)
 
         self._hide_error()
