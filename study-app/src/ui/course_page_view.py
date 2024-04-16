@@ -57,8 +57,17 @@ class CoursePageView:
             text=f"{self._course.name}, {self._course.ects_credits} op"
         )
 
-        course_info_label.grid(row=1, columnspan=3, padx=10,
+        course_info_label.grid(row=1, column=0, columnspan=3, padx=10,
                                pady=10, sticky=constants.EW)
+
+        info_text = "Alla näet kurssin tehtävät, sekä tämänhetkinen pistekertymä maksimipisteistä.\nPääset päivittämään pistekertymää merkitsemällä uuden kokonaispistemäärän tekstikenttään, ja painamalla 'Tallenna muutokset'."
+
+        info_text_label = ttk.Label(
+            master=self._frame,
+            text=info_text
+        )
+
+        info_text_label.grid(row=2, columnspan=3, padx=10, pady=10, sticky=constants.EW)
 
     def _initialize_task_fields(self):
         for i, task_id in enumerate(course_service.task_ids()):
@@ -68,13 +77,13 @@ class CoursePageView:
             points_entry = ttk.Entry(master=self._frame)
 
             previous_points = ttk.Label(master=self._frame, text=course_service.get_completed_task_points(
-                self._course.course_id, task_id) + "/" + course_service.get_max_task_points(self._course.course_id, task_id) + "p")
+                self._course.course_id, task_id) + " / " + course_service.get_max_task_points(self._course.course_id, task_id) + "p")
 
-            task_name.grid(row=i+2, column=0, padx=10,
+            task_name.grid(row=i+3, column=0, padx=10,
                            pady=5, sticky=constants.EW)
-            points_entry.grid(row=i+2, column=1, padx=10,
+            points_entry.grid(row=i+3, column=1, padx=10,
                               pady=5, sticky=constants.EW)
-            previous_points.grid(row=i+2, column=2, padx=10,
+            previous_points.grid(row=i+3, column=2, padx=10,
                                  pady=5, sticky=constants.EW)
 
     def _initialize(self):
