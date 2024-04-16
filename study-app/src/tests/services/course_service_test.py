@@ -9,113 +9,113 @@ class TestCourseService(unittest.TestCase):
     def setUp(self):
         course_repository.delete_all()
         user_repository.delete_all()
-        self.points = {1: 30, 2: 10, 3: 25,
+        self.max_points = {1: 30, 2: 10, 3: 25,
                        4: 50, 5: 7, 6: 1, 7: 0}
         self.user = user_service.create_user("test", "Test1234", "Test1234")
 
     def test_create_course_with_valid_values(self):
         course = course_service.create_course(self.user.user_id,
-                                              "Ohjelmistotekniikka", 5, self.points)
+                                              "Ohjelmistotekniikka", 5, self.max_points)
 
         self.assertEqual(course.name, "Ohjelmistotekniikka")
         self.assertEqual(course.ects_credits, 5)
-        self.assertEqual(course.points, self.points)
+        self.assertEqual(course.max_points, self.max_points)
 
     def test_create_course_with_no_name(self):
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "", 5, self.points))
+            self.user.user_id, "", 5, self.max_points))
 
     def test_create_course_with_too_long_name(self):
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "ohjelmistoohjelmistoohjelmistoohjelmistoohjelmistoa", 5, self.points))
+            self.user.user_id, "ohjelmistoohjelmistoohjelmistoohjelmistoohjelmistoa", 5, self.max_points))
 
     def test_create_course_with_negative_credits(self):
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", -1, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", -1, self.max_points))
 
     def test_create_course_with_too_many_credits(self):
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", 51, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", 51, self.max_points))
 
     def test_create_course_with_negative_exercises(self):
-        self.points["exercises"] = -1
+        self.max_points["exercises"] = -1
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", 10, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", 10, self.max_points))
 
     def test_create_course_with_too_many_exercises(self):
-        self.points["exercises"] = 101
+        self.max_points["exercises"] = 101
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", 10, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", 10, self.max_points))
 
     def test_create_course_with_negative_exercise_group(self):
-        self.points["exercise_group"] = -1
+        self.max_points["exercise_group"] = -1
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", 5, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", 5, self.max_points))
 
     def test_create_course_with_too_many_exercise_group(self):
-        self.points["exercise_group"] = 101
+        self.max_points["exercise_group"] = 101
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", 5, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", 5, self.max_points))
 
     def test_create_course_with_negative_project(self):
-        self.points["project"] = -1
+        self.max_points["project"] = -1
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", 5, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", 5, self.max_points))
 
     def test_create_course_with_too_many_project(self):
-        self.points["project"] = 101
+        self.max_points["project"] = 101
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", 5, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", 5, self.max_points))
 
     def test_create_course_with_negative_exam(self):
-        self.points["exam"] = -1
+        self.max_points["exam"] = -1
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", 5, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", 5, self.max_points))
 
     def test_create_course_with_too_many_exam(self):
-        self.points["exam"] = 101
+        self.max_points["exam"] = 101
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", 5, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", 5, self.max_points))
 
     def test_create_course_with_negative_peer_review(self):
-        self.points["peer_review"] = -1
+        self.max_points["peer_review"] = -1
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", 5, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", 5, self.max_points))
 
     def test_create_course_with_too_many_peer_review(self):
-        self.points["peer_review"] = 101
+        self.max_points["peer_review"] = 101
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", 5, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", 5, self.max_points))
 
     def test_create_course_with_negative_feedback(self):
-        self.points["feedback"] = -1
+        self.max_points["feedback"] = -1
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", 5, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", 5, self.max_points))
 
     def test_create_course_with_too_many_feedback(self):
-        self.points["feedback"] = 101
+        self.max_points["feedback"] = 101
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", 5, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", 5, self.max_points))
 
     def test_create_course_with_negative_other(self):
-        self.points["other"] = -1
+        self.max_points["other"] = -1
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", 1, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", 1, self.max_points))
 
     def test_create_course_with_too_many_other(self):
-        self.points["other"] = 101
+        self.max_points["other"] = 101
         self.assertRaises(InvalidValuesError, lambda: course_service.create_course(
-            self.user.user_id, "Ohjelmistotekniikka", 1, self.points))
+            self.user.user_id, "Ohjelmistotekniikka", 1, self.max_points))
 
     def test_get_courses_when_single_user(self):
         c1 = course_service.create_course(self.user.user_id,
-                                          "Ohjelmistotekniikka", 5, self.points)
+                                          "Ohjelmistotekniikka", 5, self.max_points)
 
         c2 = course_service.create_course(self.user.user_id,
-                                          "Tietorakenteet ja algoritmit", 10, self.points)
+                                          "Tietorakenteet ja algoritmit", 10, self.max_points)
 
         c3 = course_service.create_course(self.user.user_id,
-                                          "Ohjelmoinnin perusteet", 10, self.points)
+                                          "Ohjelmoinnin perusteet", 10, self.max_points)
 
         courses = course_service.get_courses()
 
@@ -132,13 +132,13 @@ class TestCourseService(unittest.TestCase):
         user3 = user_service.create_user("third", "Third1234", "Third1234")
 
         c1 = course_service.create_course(self.user.user_id,
-                                          "Ohjelmistotekniikka", 5, self.points)
+                                          "Ohjelmistotekniikka", 5, self.max_points)
 
         c2 = course_service.create_course(user2.user_id,
-                                          "Tietorakenteet ja algoritmit", 10, self.points)
+                                          "Tietorakenteet ja algoritmit", 10, self.max_points)
 
         c3 = course_service.create_course(user3.user_id,
-                                          "Ohjelmoinnin perusteet", 10, self.points)
+                                          "Ohjelmoinnin perusteet", 10, self.max_points)
 
         courses = course_service.get_courses()
 
@@ -152,20 +152,20 @@ class TestCourseService(unittest.TestCase):
 
     def test_course_points_are_correct(self):
         course = course_service.create_course(self.user.user_id,
-                                              "Ohjelmistotekniikka", 5, self.points)
+                                              "Ohjelmistotekniikka", 5, self.max_points)
 
-        self.assertEqual(course.points, self.points)
+        self.assertEqual(course.max_points, self.max_points)
 
     def test_missing_course_points_are_correct(self):
         points = {1: 30, 3: 25, 4: 50}
         course = course_service.create_course(self.user.user_id,
                                               "Ohjelmistotekniikka", 5, points)
 
-        self.assertEqual(course.points, points)
+        self.assertEqual(course.max_points, points)
 
     def test_get_course_by_userid(self):
         course = course_service.create_course(self.user.user_id,
-                                              "Ohjelmistotekniikka", 5, self.points)
+                                              "Ohjelmistotekniikka", 5, self.max_points)
 
         courses = course_service.get_courses_by_user_id(self.user.user_id)
 
@@ -174,7 +174,7 @@ class TestCourseService(unittest.TestCase):
 
     def test_delete_course_when_only_one_course(self):
         course = course_service.create_course(self.user.user_id,
-                                              "Ohjelmistotekniikka", 5, self.points)
+                                              "Ohjelmistotekniikka", 5, self.max_points)
 
         course_service.delete_course(course.course_id)
 
@@ -184,10 +184,10 @@ class TestCourseService(unittest.TestCase):
 
     def test_delete_course_when_multiple_courses(self):
         course1 = course_service.create_course(self.user.user_id,
-                                               "Ohjelmistotekniikka", 5, self.points)
+                                               "Ohjelmistotekniikka", 5, self.max_points)
 
         course2 = course_service.create_course(self.user.user_id,
-                                               "Tietorakenteet ja algoritmit", 10, self.points)
+                                               "Tietorakenteet ja algoritmit", 10, self.max_points)
 
         course_service.delete_course(course1.course_id)
 

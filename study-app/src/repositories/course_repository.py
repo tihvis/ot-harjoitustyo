@@ -26,7 +26,7 @@ class CourseRepository:
 
         return self.create_course_object(courses)
 
-    def get_course_points(self, course_id):
+    def get_course_max_points(self, course_id):
         cursor = self._connection.cursor()
 
         cursor.execute(
@@ -54,10 +54,10 @@ class CourseRepository:
         result = []
         for course in courses:
             course_id = course["course_id"]
-            points = self.get_course_points(course_id)
+            max_points = self.get_course_max_points(course_id)
             completion = self.get_completion_info(course_id)
             result.append(Course(course["user_id"], course["name"],
-                                 course["ects_credits"], points, completion, course_id))
+                                 course["ects_credits"], max_points, completion, course_id))
 
         return result
 
@@ -74,9 +74,9 @@ class CourseRepository:
         query = "INSERT INTO course_points (course_id, task_id, " \
                 "max_points, completed_points) VALUES (?, ?, ?, ?)"
 
-        for task_id in course.points:
+        for task_id in course.max_points:
             cursor.execute(query, (course_id, task_id,
-                           course.points[task_id], 0))
+                           course.max_points[task_id], 0))
 
         self._connection.commit()
 

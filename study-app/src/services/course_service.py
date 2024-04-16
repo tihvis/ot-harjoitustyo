@@ -3,25 +3,19 @@ from entities.course import Course
 from repositories.course_repository import (
     course_repository as default_course_repository)
 
-from repositories.user_repository import (
-    user_repository as default_user_repository)
-
-
 class InvalidValuesError(Exception):
     pass
 
 
 class CourseService:
-    def __init__(self, course_repository=default_course_repository,
-                 user_repository=default_user_repository):
+    def __init__(self, course_repository=default_course_repository):
         self._user = None
         self._course_repository = course_repository
-        self._user_repository = user_repository
 
-    def create_course(self, user_id, name, ects_credits, points):
-        if self.values_ok(name, ects_credits, points):
+    def create_course(self, user_id, name, ects_credits, max_points):
+        if self.values_ok(name, ects_credits, max_points):
             course = self._course_repository.create(Course(
-                user_id=user_id, name=name, ects_credits=ects_credits, points=points))
+                user_id=user_id, name=name, ects_credits=ects_credits, max_points=max_points))
 
             return course
 
