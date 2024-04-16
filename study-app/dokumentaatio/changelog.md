@@ -16,5 +16,5 @@
 - Lisätty Pylint.
 - Testausta laajennettu course_servicen ja user_servicen osalta.
 - Etusivulle lisätty käynnissä olevien kurssien listaus ja "näytä/muokkaa" painikkeet.
-- Kurssisivun näkymä hyvällä mallilla (vielä puuttuu tähänastisten kurssipisteiden tieto).
-- Lisätty kurssin poistaminen ja siihen liittyvä vahvistusviesti.
+- Kurssisivulle lisätty listaus kyseisen kurssin tehtävistä, ja tieto niiden etenemisestä (eli suoritetut pisteet / max pisteet).
+- Kurssin poistaminen onnistuu kurssisivulta, ja käyttäjää pyydetään vahvistamaan poistaminen erikseen.
