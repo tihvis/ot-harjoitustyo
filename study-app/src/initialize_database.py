@@ -71,13 +71,13 @@ def initialize_tasks_table(connection):
     cursor = connection.cursor()
 
     cursor.execute("""insert into tasks (task_id, task) values
-                   (1, "exercises"),
-                   (2, "exercise_group"),
-                   (3, "project"),
-                   (4, "exam"),
-                   (5, "peer_review"),
-                   (6, "feedback"),
-                   (7, "other");
+                   (1, 'Tehtävät'),
+                   (2, 'Laskuharjoitukset'),
+                   (3, 'Harjoitustyö'),
+                   (4, 'Koe'),
+                   (5, 'Vertaisarviointi'),
+                   (6, 'Kurssipalaute'),
+                   (7, 'Muu');
                 """)
 
     connection.commit()
@@ -90,7 +90,8 @@ def create_course_points_table(connection):
         create table course_points (
             course_id INTEGER REFERENCES courses(course_id),
             task_id INTEGER REFERENCES tasks(task_id),
-            points INTEGER
+            max_points INTEGER, 
+            completed_points INTEGER
         );
     """)
 
