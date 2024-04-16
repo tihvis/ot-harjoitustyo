@@ -5,3 +5,4 @@ Helsingin yliopiston kurssin *Ohjelmistotekniikka* harjoitustyö ja viikkotehtä
 - [Vaatimusmäärittely](/study-app/dokumentaatio/vaatimusmaarittely.md)
 - [Työaikakirjanpito](/study-app/dokumentaatio/tuntikirjanpito.md)
 - [Changelog](/study-app/dokumentaatio/changelog.md)
+- [Arkkitehtuurikuvaus](/study-app/dokumentaatio/arkkitehtuuri.md)
