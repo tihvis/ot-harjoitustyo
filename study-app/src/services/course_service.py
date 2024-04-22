@@ -3,6 +3,7 @@ from entities.course import Course
 from repositories.course_repository import (
     course_repository as default_course_repository)
 
+
 class InvalidValuesError(Exception):
     pass
 
@@ -21,15 +22,14 @@ class CourseService:
 
         raise InvalidValuesError
 
-    def update_course(self, course_id, name, ects_credits, points):
-        pass
-        # if self.values_ok(name, ects_credits, points):
-        #     course = self._course_repository.update(Course(
-        #         course_id=course_id, name=name, ects_credits=ects_credits, points=points))
+    def update_course(self, course_id, completed_points):
+        if self.completed_points_ok(course_id, completed_points):
+            self._course_repository.update(
+                course_id=course_id, completed_points=completed_points)
 
-        #     return course
+            return True
 
-        # raise InvalidValuesError
+        raise InvalidValuesError
 
     def get_courses(self):
         return self._course_repository.find_all()
@@ -47,10 +47,10 @@ class CourseService:
         return str(self._course_repository.get_name_of_task(task_id))
 
     def get_max_task_points(self, course_id, task):
-        return str(self._course_repository.get_max_task_points(course_id, task))
+        return self._course_repository.get_max_task_points(course_id, task)
 
     def get_completed_task_points(self, course_id, task):
-        return str(self._course_repository.get_completed_task_points(course_id, task))
+        return self._course_repository.get_completed_task_points(course_id, task)
 
     def values_ok(self, name, ects_credits, points):
         if not isinstance(name, str) or len(name) < 1 or len(name) > 50:
@@ -59,6 +59,14 @@ class CourseService:
             return False
         for task in points:
             if points[task] < 0 or points[task] > 100:
+                return False
+        return True
+
+    def completed_points_ok(self, course_id, completed_points):
+        for task_id in completed_points:
+            if int(completed_points[task_id]) < 0:
+                return False
+            if int(completed_points[task_id]) > self.get_max_task_points(course_id, task_id):
                 return False
         return True
 

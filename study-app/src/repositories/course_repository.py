@@ -84,6 +84,17 @@ class CourseRepository:
 
         return course
 
+    def update(self, course_id, completed_points):
+        cursor = self._connection.cursor()
+
+        query = "UPDATE course_points SET completed_points = ? WHERE course_id = ? AND task_id = ?"
+
+        for task_id in completed_points:
+            cursor.execute(
+                query, (completed_points[task_id], course_id, task_id))
+
+        self._connection.commit()
+
     def get_max_task_points(self, course_id, task_id):
 
         cursor = self._connection.cursor()
@@ -101,8 +112,9 @@ class CourseRepository:
         cursor = self._connection.cursor()
 
         cursor.execute(
-            "SELECT completed_points FROM course_points WHERE task_id = ? "
-            "AND course_id = ?", (task_id, course_id))
+            "SELECT cp.completed_points FROM course_points cp "
+            "JOIN tasks t ON cp.task_id = t.task_id WHERE t.task_id = ? "
+            "AND cp.course_id = ?", (task_id, course_id))
 
         completed_points = cursor.fetchone()
 
