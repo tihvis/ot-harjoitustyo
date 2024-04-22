@@ -36,6 +36,13 @@ class AddCourseView:
     def _hide_error(self):
         self._error_label.grid_remove()
 
+    def _initialize_header(self):
+        info_text = "Lisää uusi kurssi syöttämällä sen nimi, opintopisteet sekä kurssin arviontiin vaikuttavien tehtävien maksimipistemäärät. Voit jättää pistekentät tyhjiksi, mikäli kurssilla ei ole kyseisiä tehtävätyyppejä."
+
+        info = ttk.Label(master=self._frame, text=info_text, wraplength=500)
+
+        info.grid(padx=10, pady=10, sticky=constants.EW)
+
     def _initialize_course_info_fields(self):
         name_label = ttk.Label(master=self._frame, text="Nimi:")
         self._name_entry = ttk.Entry(master=self._frame)
@@ -150,11 +157,13 @@ class AddCourseView:
         self._error_label = ttk.Label(
             master=self._frame,
             textvariable=self._error_variable,
+            wraplength=500,
             foreground="red"
         )
 
         self._error_label.grid(padx=10, pady=5)
 
+        self._initialize_header()
         self._initialize_course_info_fields()
         self._initialize_task_fields()
 
