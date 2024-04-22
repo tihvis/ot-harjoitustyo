@@ -17,10 +17,11 @@ class CourseRepository:
 
         return self.create_course_object(courses)
 
-    def find_by_user_id(self, user_id):
+    def find_ongoing_courses_by_user_id(self, user_id):
         cursor = self._connection.cursor()
 
-        cursor.execute("SELECT * FROM courses WHERE user_id = ?", (user_id,))
+        cursor.execute(
+            "SELECT * FROM courses WHERE user_id = ? and done = ?", (user_id, 0))
 
         courses = cursor.fetchall()
 
@@ -74,10 +75,10 @@ class CourseRepository:
     def create(self, course):
         cursor = self._connection.cursor()
 
-        query = "INSERT INTO courses (user_id, name, ects_credits) VALUES (?, ?, ?)"
+        query = "INSERT INTO courses (user_id, name, ects_credits, done) VALUES (?, ?, ?, ?)"
 
         cursor.execute(
-            query, (course.user_id, course.name, course.ects_credits))
+            query, (course.user_id, course.name, course.ects_credits, 0))
 
         course_id = cursor.lastrowid
 
@@ -105,8 +106,14 @@ class CourseRepository:
 
         self._connection.commit()
 
-    def set_done(self, course_id, done=True):
-        pass
+    def set_done(self, course_id, grade, completion_date):
+        cursor = self._connection.cursor()
+
+        query = "UPDATE courses SET done = ?, grade = ?, completion_date = ? WHERE course_id = ?"
+
+        cursor.execute(query, (1, grade, completion_date, course_id))
+
+        self._connection.commit()
 
     def delete_course(self, course_id):
         cursor = self._connection.cursor()

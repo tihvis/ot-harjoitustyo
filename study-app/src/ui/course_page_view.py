@@ -1,5 +1,6 @@
-from tkinter import ttk, StringVar, constants, messagebox
-from services.course_service import course_service, InvalidValuesError
+from tkinter import ttk, StringVar, IntVar, constants, messagebox
+from datetime import datetime
+from services.course_service import course_service, InvalidValuesError, InvalidCompletionValuesError
 from services.user_service import user_service
 
 
@@ -19,7 +20,9 @@ class CoursePageView:
         self._feedback_entry = None
         self._other_entry = None
         self._exam_entry = None
-        self._grade_entry = None
+        self._done_value = None
+        self._done_button = None
+        self._grade = None
         self._comp_date_entry = None
         self._error_variable = None
         self._error_label = None
@@ -64,17 +67,29 @@ class CoursePageView:
             if self._other_entry and self._other_entry.get():
                 new_completed_points[7] = int(self._other_entry.get())
 
-            course_service.update_course(
-                self._course.course_id, new_completed_points)
+            if self._done_value.get() == 1:
+                grade = self._grade.get()
+                completion_date = self._comp_date_entry.get()
+
+                course_service.set_done(
+                    self._course.course_id, grade, completion_date)
+
+            if len(new_completed_points) > 0:
+                course_service.update_course(
+                    self._course.course_id, new_completed_points)
             self._handle_return()
 
         except ValueError:
             self._show_error(
-                "Syötä kenttiin vain kokonaislukuja.")
+                "Tehtäväpisteiden tulee olla kokonaislukuja. Mikäli merkitsit kurssin suoritetuksi, tarkista lisäksi, että päivämäärä on syötetty muodossa pp.kk.vvvv.")
 
         except InvalidValuesError:
             self._show_error(
-                "Tarkista että syöttämäsi arvot ovat lukuja väliltä 0 - tehtävän maksimipisteet.")
+                "Tarkista että syöttämäsi pisteet ovat kokonaislukuja, jotka eivät ylitä kyseisen tehtävän maksimipisteitä.")
+
+        except InvalidCompletionValuesError:
+            self._show_error(
+                "Valitse kurssin arvosana.")
 
     def _delete_course_handler(self):
         course_service.delete_course(self._course.course_id)
@@ -96,7 +111,7 @@ class CoursePageView:
         course_info_label.grid(row=1, column=0, columnspan=3, padx=10,
                                pady=10, sticky=constants.EW)
 
-        info_text = "Alla näet kurssin tehtävät, sekä tämänhetkinen pistekertymä maksimipisteistä.Pääset päivittämään pistekertymää merkitsemällä uuden kokonaispistemäärän tekstikenttään, ja painamalla 'Tallenna muutokset'."
+        info_text = "Alla näet kurssin tehtävät, sekä tämänhetkisen pistekertymän maksimipisteistä. Pääset päivittämään pistekertymää merkitsemällä uuden kokonaispistemäärän tekstikenttään, ja painamalla 'Tallenna muutokset'.\n\nMikäli merkitset kurssin suoritetuksi, valitse kurssin arvosana ja täytä suorituspäivämäärä muodossa pp.kk.vvvv."
 
         info_text_label = ttk.Label(
             master=self._frame,
@@ -111,10 +126,6 @@ class CoursePageView:
         self._max_points = self._course.max_points
         self._completed_points = course_service.get_completed_points_by_course(
             self._course.course_id)
-        # for task_id in course_service.task_ids():
-        #     if task_id in self._course.max_points:
-        #         self._completed_points[task_id] = course_service.get_completed_task_points(
-        #             self._course.course_id, task_id)
 
         if 1 in self._max_points:
             exercise_label = ttk.Label(master=self._frame, text="Tehtävät:")
@@ -210,6 +221,37 @@ class CoursePageView:
             prev_other_label.grid(row=9, column=2, padx=10,
                                   pady=5, sticky=constants.EW)
 
+    def _initialize_completion_info_fields(self):
+        self._done_value = IntVar()
+        done_label = ttk.Label(
+            master=self._frame, text="Merkitse suoritetuksi:")
+        self._done_button = ttk.Checkbutton(
+            master=self._frame, variable=self._done_value)
+
+        done_label.grid(row=10, column=0, padx=10, pady=5, sticky=constants.W)
+        self._done_button.grid(row=10, column=1, padx=10,
+                               pady=5, sticky=constants.W)
+
+        self._grade = StringVar()
+        grades = ["Valitse", "1", "2", "3", "4", "5", "Hyväksytty", "Hylätty"]
+        grade_label = ttk.Label(master=self._frame, text="Arvosana:")
+        grade_dropdown = ttk.OptionMenu(self._frame, self._grade, *grades)
+
+        grade_label.grid(row=11, column=0, padx=10, pady=5, sticky=constants.W)
+        grade_dropdown.grid(row=11, column=1, padx=10,
+                            pady=5, sticky=constants.W)
+
+        current_date = datetime.now().strftime("%d.%m.%Y")
+        comp_date_label = ttk.Label(
+            master=self._frame, text="Suorituspäivämäärä (pp.kk.vvvv):")
+        self._comp_date_entry = ttk.Entry(master=self._frame, width=20)
+        self._comp_date_entry.insert(0, current_date)
+
+        comp_date_label.grid(row=12, column=0, padx=10,
+                             pady=5, sticky=constants.W)
+        self._comp_date_entry.grid(row=12, column=1, padx=10,
+                                   pady=5, sticky=constants.EW)
+
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
 
@@ -218,6 +260,7 @@ class CoursePageView:
         self._error_label = ttk.Label(
             master=self._frame,
             textvariable=self._error_variable,
+            wraplength=500,
             foreground="red"
         )
 
@@ -226,6 +269,7 @@ class CoursePageView:
 
         self._initialize_course_info()
         self._initialize_task_fields()
+        self._initialize_completion_info_fields()
 
         update_course_button = ttk.Button(
             master=self._frame,
