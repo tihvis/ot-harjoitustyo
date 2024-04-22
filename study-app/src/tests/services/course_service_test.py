@@ -10,7 +10,7 @@ class TestCourseService(unittest.TestCase):
         course_repository.delete_all()
         user_repository.delete_all()
         self.max_points = {1: 30, 2: 10, 3: 25,
-                       4: 50, 5: 7, 6: 1, 7: 0}
+                           4: 50, 5: 7, 6: 1, 7: 0}
         self.user = user_service.create_user("test", "Test1234", "Test1234")
 
     def test_create_course_with_valid_values(self):
@@ -157,11 +157,11 @@ class TestCourseService(unittest.TestCase):
         self.assertEqual(course.max_points, self.max_points)
 
     def test_missing_course_points_are_correct(self):
-        points = {1: 30, 3: 25, 4: 50}
+        max_points = {1: 30, 3: 25, 4: 50}
         course = course_service.create_course(self.user.user_id,
-                                              "Ohjelmistotekniikka", 5, points)
+                                              "Ohjelmistotekniikka", 5, max_points)
 
-        self.assertEqual(course.max_points, points)
+        self.assertEqual(course.max_points, max_points)
 
     def test_get_course_by_userid(self):
         course = course_service.create_course(self.user.user_id,
@@ -195,3 +195,66 @@ class TestCourseService(unittest.TestCase):
 
         self.assertEqual(len(courses), 1)
         self.assertEqual(courses[0].name, course2.name)
+
+    def test_update_all_course_tasks_with_valid_values(self):
+        course = course_service.create_course(self.user.user_id,
+                                              "Ohjelmistotekniikka", 5, {1: 10, 2: 9, 3: 8, 4: 7, 5: 6, 6: 5, 7: 4})
+
+        completed_points = {1: 7, 2: 6, 3: 5, 4: 4, 5: 3, 6: 2, 7: 1}
+
+        course_service.update_course(course.course_id, completed_points)
+
+        self.assertEqual(course_service.get_completed_points_by_course(
+            course.course_id), completed_points)
+
+    def test_update_part_of_course_tasks_with_valid_values(self):
+        course = course_service.create_course(self.user.user_id,
+                                              "Ohjelmistotekniikka", 5, {1: 10, 2: 9, 3: 8, 4: 7, 5: 6, 6: 5, 7: 4})
+
+        completed_points = {1: 7, 2: 6, 5: 5}
+
+        course_service.update_course(course.course_id, completed_points)
+
+        self.assertEqual(course_service.get_completed_points_by_course(
+            course.course_id)[1], completed_points[1])
+        self.assertEqual(course_service.get_completed_points_by_course(
+            course.course_id)[2], completed_points[2])
+        self.assertEqual(course_service.get_completed_points_by_course(
+            course.course_id)[3], 0)
+        self.assertEqual(course_service.get_completed_points_by_course(
+            course.course_id)[4], 0)
+        self.assertEqual(course_service.get_completed_points_by_course(
+            course.course_id)[5], completed_points[5])
+        self.assertEqual(course_service.get_completed_points_by_course(
+            course.course_id)[6], 0)
+        self.assertEqual(course_service.get_completed_points_by_course(
+            course.course_id)[7], 0)
+
+    def test_update_course_with_negative_points(self):
+        course = course_service.create_course(self.user.user_id,
+                                              "Ohjelmistotekniikka", 5, self.max_points)
+
+        completed_points = {1: -1, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0}
+
+        self.assertRaises(InvalidValuesError, lambda: course_service.update_course(
+            course.course_id, completed_points))
+
+    def test_update_course_with_too_many_points(self):
+        course = course_service.create_course(self.user.user_id,
+                                              "Ohjelmistotekniikka", 5, self.max_points)
+
+        completed_points = {1: 31}
+
+        self.assertRaises(InvalidValuesError, lambda: course_service.update_course(
+            course.course_id, completed_points))
+
+    def test_update_course_with_max_value_of_points(self):
+        course = course_service.create_course(self.user.user_id,
+                                              "Ohjelmistotekniikka", 5, self.max_points)
+
+        completed_points = {1: 30}
+
+        course_service.update_course(course.course_id, completed_points)
+
+        self.assertEqual(course_service.get_completed_points_by_course(
+            course.course_id)[1], completed_points[1])

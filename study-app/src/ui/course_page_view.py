@@ -10,6 +10,7 @@ class CoursePageView:
         self._course = course
         self._handle_return = handle_return
         self._completed_points = {}
+        self._max_points = {}
         self._frame = None
         self._exercises_entry = None
         self._ex_group_entry = None
@@ -39,32 +40,32 @@ class CoursePageView:
         self._error_label.grid_remove()
 
     def _update_course_handler(self):
-        completed_points = {}
+        new_completed_points = {}
         try:
 
             if self._exercises_entry and self._exercises_entry.get():
-                completed_points[1] = int(self._exercises_entry.get())
+                new_completed_points[1] = int(self._exercises_entry.get())
 
             if self._ex_group_entry and self._ex_group_entry.get():
-                completed_points[2] = int(self._ex_group_entry.get())
+                new_completed_points[2] = int(self._ex_group_entry.get())
 
             if self._project_entry and self._project_entry.get():
-                completed_points[3] = int(self._project_entry.get())
+                new_completed_points[3] = int(self._project_entry.get())
 
             if self._exam_entry and self._exam_entry.get():
-                completed_points[4] = int(self._exam_entry.get())
+                new_completed_points[4] = int(self._exam_entry.get())
 
             if self._peer_review_entry and self._peer_review_entry.get():
-                completed_points[5] = int(self._peer_review_entry.get())
+                new_completed_points[5] = int(self._peer_review_entry.get())
 
             if self._feedback_entry and self._feedback_entry.get():
-                completed_points[6] = int(self._feedback_entry.get())
+                new_completed_points[6] = int(self._feedback_entry.get())
 
             if self._other_entry and self._other_entry.get():
-                completed_points[7] = int(self._other_entry.get())
+                new_completed_points[7] = int(self._other_entry.get())
 
             course_service.update_course(
-                self._course.course_id, completed_points)
+                self._course.course_id, new_completed_points)
             self._handle_return()
 
         except ValueError:
@@ -107,16 +108,19 @@ class CoursePageView:
                              pady=10, sticky=constants.EW)
 
     def _initialize_task_fields(self):
-        for task_id in course_service.task_ids():
-            if task_id in self._course.max_points:
-                self._completed_points[task_id] = course_service.get_completed_task_points(
-                    self._course.course_id, task_id)
+        self._max_points = self._course.max_points
+        self._completed_points = course_service.get_completed_points_by_course(
+            self._course.course_id)
+        # for task_id in course_service.task_ids():
+        #     if task_id in self._course.max_points:
+        #         self._completed_points[task_id] = course_service.get_completed_task_points(
+        #             self._course.course_id, task_id)
 
-        if 1 in self._completed_points:
+        if 1 in self._max_points:
             exercise_label = ttk.Label(master=self._frame, text="Tehtävät:")
             self._exercises_entry = ttk.Entry(master=self._frame, width=20)
-            prev_exercise_points_label = ttk.Label(master=self._frame, text=(str(course_service.get_completed_task_points(
-                self._course.course_id, 1))) + " / " + (str(course_service.get_max_task_points(self._course.course_id, 1)) + "p"))
+            prev_exercise_points_label = ttk.Label(master=self._frame, text=(
+                str(self._completed_points[1])) + " / " + (str(self._max_points[1]) + "p"))
 
             exercise_label.grid(row=3, column=0, padx=10,
                                 pady=5, sticky=constants.EW)
@@ -129,8 +133,8 @@ class CoursePageView:
             ex_group_label = ttk.Label(
                 master=self._frame, text="Laskuharjoitukset:")
             self._ex_group_entry = ttk.Entry(master=self._frame, width=20)
-            prev_ex_group_label = ttk.Label(master=self._frame, text=(str(course_service.get_completed_task_points(
-                self._course.course_id, 2))) + " / " + (str(course_service.get_max_task_points(self._course.course_id, 2)) + "p"))
+            prev_ex_group_label = ttk.Label(master=self._frame, text=(
+                str(self._completed_points[2])) + " / " + (str(self._max_points[2]) + "p"))
 
             ex_group_label.grid(row=4, column=0, padx=10,
                                 pady=5, sticky=constants.W)
@@ -142,8 +146,8 @@ class CoursePageView:
         if 3 in self._completed_points:
             project_label = ttk.Label(master=self._frame, text="Harjoitustyö:")
             self._project_entry = ttk.Entry(master=self._frame, width=20)
-            prev_project_label = ttk.Label(master=self._frame, text=(str(course_service.get_completed_task_points(
-                self._course.course_id, 3))) + " / " + (str(course_service.get_max_task_points(self._course.course_id, 3)) + "p"))
+            prev_project_label = ttk.Label(master=self._frame, text=(
+                str(self._completed_points[3])) + " / " + (str(self._max_points[3]) + "p"))
 
             project_label.grid(row=5, column=0, padx=10,
                                pady=5, sticky=constants.W)
@@ -155,8 +159,8 @@ class CoursePageView:
         if 4 in self._completed_points:
             exam_label = ttk.Label(master=self._frame, text="Koe:")
             self._exam_entry = ttk.Entry(master=self._frame, width=20)
-            prev_exam_label = ttk.Label(master=self._frame, text=(str(course_service.get_completed_task_points(
-                self._course.course_id, 4))) + " / " + (str(course_service.get_max_task_points(self._course.course_id, 4)) + "p"))
+            prev_exam_label = ttk.Label(master=self._frame, text=(
+                str(self._completed_points[4])) + " / " + (str(self._max_points[4]) + "p"))
 
             exam_label.grid(row=6, column=0, padx=10,
                             pady=5, sticky=constants.W)
@@ -169,8 +173,8 @@ class CoursePageView:
             peer_review_label = ttk.Label(
                 master=self._frame, text="Vertais-/itsearviointi:")
             self._peer_review_entry = ttk.Entry(master=self._frame, width=20)
-            prev_review_label = ttk.Label(master=self._frame, text=(str(course_service.get_completed_task_points(
-                self._course.course_id, 5))) + " / " + (str(course_service.get_max_task_points(self._course.course_id, 5)) + "p"))
+            prev_review_label = ttk.Label(master=self._frame, text=(
+                str(self._completed_points[5])) + " / " + (str(self._max_points[5]) + "p"))
 
             peer_review_label.grid(
                 row=7, column=0, padx=10, pady=5, sticky=constants.W)
@@ -183,8 +187,8 @@ class CoursePageView:
             feedback_label = ttk.Label(
                 master=self._frame, text="Kurssipalaute:")
             self._feedback_entry = ttk.Entry(master=self._frame, width=20)
-            prev_feedback_label = ttk.Label(master=self._frame, text=(str(course_service.get_completed_task_points(
-                self._course.course_id, 6))) + " / " + (str(course_service.get_max_task_points(self._course.course_id, 6)) + "p"))
+            prev_feedback_label = ttk.Label(master=self._frame, text=(
+                str(self._completed_points[6])) + " / " + (str(self._max_points[6]) + "p"))
 
             feedback_label.grid(row=8, column=0, padx=10,
                                 pady=5, sticky=constants.W)
@@ -196,8 +200,8 @@ class CoursePageView:
         if 7 in self._completed_points:
             other_label = ttk.Label(master=self._frame, text="Muu:")
             self._other_entry = ttk.Entry(master=self._frame, width=20)
-            prev_other_label = ttk.Label(master=self._frame, text=(str(course_service.get_completed_task_points(
-                self._course.course_id, 7))) + " / " + (str(course_service.get_max_task_points(self._course.course_id, 7)) + "p"))
+            prev_other_label = ttk.Label(master=self._frame, text=(
+                str(self._completed_points[7])) + " / " + (str(self._max_points[7]) + "p"))
 
             other_label.grid(row=9, column=0, padx=10,
                              pady=5, sticky=constants.W)

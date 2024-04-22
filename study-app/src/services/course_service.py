@@ -27,9 +27,8 @@ class CourseService:
             self._course_repository.update(
                 course_id=course_id, completed_points=completed_points)
 
-            return True
-
-        raise InvalidValuesError
+        else:
+            raise InvalidValuesError
 
     def get_courses(self):
         return self._course_repository.find_all()
@@ -40,17 +39,11 @@ class CourseService:
     def delete_course(self, course_id):
         self._course_repository.delete_course(course_id)
 
-    def task_ids(self):
-        return self._course_repository.get_task_ids()
+    def get_max_points_by_course(self, course_id):
+        return self._course_repository.get_max_points_by_course(course_id)
 
-    def get_name_of_task(self, task_id):
-        return str(self._course_repository.get_name_of_task(task_id))
-
-    def get_max_task_points(self, course_id, task):
-        return self._course_repository.get_max_task_points(course_id, task)
-
-    def get_completed_task_points(self, course_id, task):
-        return self._course_repository.get_completed_task_points(course_id, task)
+    def get_completed_points_by_course(self, course_id):
+        return self._course_repository.get_completed_points_by_course(course_id)
 
     def values_ok(self, name, ects_credits, points):
         if not isinstance(name, str) or len(name) < 1 or len(name) > 50:
@@ -66,7 +59,7 @@ class CourseService:
         for task_id in completed_points:
             if int(completed_points[task_id]) < 0:
                 return False
-            if int(completed_points[task_id]) > self.get_max_task_points(course_id, task_id):
+            if int(completed_points[task_id]) > self.get_max_points_by_course(course_id)[task_id]:
                 return False
         return True
 
