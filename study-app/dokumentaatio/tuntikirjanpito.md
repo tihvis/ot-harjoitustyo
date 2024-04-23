@@ -10,4 +10,5 @@
 | 12.4. | 4    | kurssisivun näkymä, kurssin poistaminen, ulkoasun yhtenäistäminen|
 | 16.4. | 4    | kurssisivulle lisätty listaus kyseisen kurssin tehtävistä, sekä pistekertymä tähän asti versus maksimipisteet|
 | 22.4. | 7    | kurssisivulle lisätty kentät pisteiden päivittämistä varten, sekä kurssin merkitseminen suoritetuksi. Suoritettujen kurssien näkymää aloitettu. Testejä lisätty.|
-| yht.  | 43   | | 
+| 23.4. | 1    | Suoritettujen kurssien näkymää paranneltu.|
+| yht.  | 44   | | 
