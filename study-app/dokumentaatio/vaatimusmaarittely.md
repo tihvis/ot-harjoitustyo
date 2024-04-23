@@ -37,39 +37,44 @@ Sovellus aukeaa kirjautumisnäkymään.
 
 ## Perusversion tarjoama toiminnallisuus
 
-:white_check_mark: = valmis
+:sunglasses: = koko toiminnallisuus valmis
+
+:white_check_mark: = osio valmis
+
 :hourglass_flowing_sand: = työn alla
 
 
 ### Ennen kirjautumista
 
-- Käyttäjä voi luoda järjestelmään käyttäjätunnuksen. :white_check_mark:
+- :sunglasses: Käyttäjä voi luoda järjestelmään käyttäjätunnuksen.
   - :white_check_mark: Käyttäjätunnuksen täytyy olla uniikki ja pituudeltaan vähintään 4 merkkiä.
   - :white_check_mark: Salasanan tulee olla vähintään 8 merkkiä pitkä, sisältäen vähintään yhden ison kirjaimen ja yhden numeron.
   - :white_check_mark: Mikäli käyttäjätunnus tai salasana eivät täytä vaadittuja kriteereitä, käyttäjälle tulee tästä ilmoitus.
-- Käyttäjä voi kirjautua järjestelmään. :white_check_mark:
+- :sunglasses: Käyttäjä voi kirjautua järjestelmään.
   - :white_check_mark: Kirjautuminen onnistuu olemassaolevalla käyttäjätunnuksella ja salasanalla.
   - :white_check_mark: Käyttäjälle tulee virheilmoitus, mikäli käyttäjätunnusta ei olemassa, tai syötetty salasana on väärin.
 
 ### Kirjautumisen jälkeen
 
-- Käyttäjä näkee etusivulla listattuna hänen tällä hetkellä käynnissä olevat kurssit. :white_check_mark:
+- :sunglasses: Käyttäjä näkee etusivulla listattuna hänen tällä hetkellä käynnissä olevat kurssit.
+  - :white_check_mark: Jokaisen kurssin kohdalla on "Näytä/muokkaa"-painike, jota painamalla avautuu kyseisen kurssin oma kurssisivu.
 
-- Käyttäjä voi lisätä uuden oman suoritetun/käynnissä olevan kurssin järjestelmään. :white_check_mark:
+- :sunglasses: Käyttäjä voi lisätä uuden oman suoritetun/käynnissä olevan kurssin järjestelmään.
   - :white_check_mark: Kurssin tietoihin saa tallennettua kurssin nimen, opintopistemäärän, sekä tiedot siitä, mistä eri osa-alueista (esim. tehtävät/harjoitustyö/koe/vertaisarviot, yms) kurssin suoritus koostuu.
   - :white_check_mark: Käyttäjä saa lisättyä jokaisen osa-alueen kohdalle niiden tuomat maksimipisteet.
 
-- Käyttäjä voi päivittää omien käynnissä olevien kurssien etenemistä.
+- :sunglasses: Käyttäjä voi päivittää omien käynnissä olevien kurssien etenemistä.
   - :white_check_mark: Käyttäjä voi merkitä reaaliaikaisesti kurssin pistekertymän etenemistä, ja nähdä montako pistettä kustakin osa-alueesta on siihen asti kerätty maksimiin verrattuna.
   - :white_check_mark: Käyttäjä voi merkitä kurssin suoritetuksi, jolloin lisäksi ilmoitetaan suorituspäivä, sekä saatu arvosana.
   - :white_check_mark: Käyttäjä voi poistaa kyseisen kurssin suorituksen.
 
-- Käyttäjä voi nähdä listan omista suoritetuista kursseistaan. :hourglass_flowing_sand:
+- :hourglass_flowing_sand: Käyttäjä voi nähdä listan omista suoritetuista kursseistaan.
   - Listauksessa näkyy montako kurssia ja opintopistettä tähän asti on suoritettu, ja mikä suoritettujen kurssien keskiarvo on.
   - Listauksessa näkyy lisäksi suoritettujen kurssien nimet, suorituspäivät, opintopisteet ja arvosana.
   - Listalla olevien suoritettujen kurssien tietoja pääsee muokkaamaan. Tämä on hyödyllistä, jos käyttäjä haluaa esimerkiksi myöhemmin uusia kurssin kokeen ja korottaa sen arvosanaa.
 
-- Käyttäjä voi kirjautua ulos. :white_check_mark:
+- :sunglasses: Käyttäjä voi kirjautua ulos.
+  - :white_check_mark: Uloskirjautumisen jälkeen käyttäjä ohjataan sisäänkirjautumissivulle.
 
 ## Jatkokehitysideoita
 
