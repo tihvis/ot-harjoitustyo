@@ -48,6 +48,9 @@ class CourseService:
     def get_courses_by_user_id(self, user_id):
         return self._course_repository.find_ongoing_courses_by_user_id(user_id)
 
+    def get_completed_courses_by_user_id(self, user_id):
+        return self._course_repository.find_completed_courses_by_user_id(user_id)
+
     def delete_course(self, course_id):
         self._course_repository.delete_course(course_id)
 

@@ -3,7 +3,7 @@ from ui.main_view import MainView
 from ui.create_user_view import CreateUserView
 from ui.add_course_view import AddCourseView
 from ui.course_page_view import CoursePageView
-# from ui.completed_view import CompletedView
+from ui.completed_view import CompletedView
 
 
 class UI:
@@ -40,7 +40,7 @@ class UI:
         self._hide_current_view()
 
         self._current_view = MainView(
-            self._root, self._show_login_view, self._show_add_course_view, self._show_course_page_view)
+            self._root, self._show_login_view, self._show_add_course_view, self._show_course_page_view, self._show_completed_view)
 
         self._current_view.pack()
 
@@ -60,9 +60,10 @@ class UI:
 
         self._current_view.pack()
 
-    # def _show_completed_view(self):
-    #     self._hide_current_view()
+    def _show_completed_view(self):
+        self._hide_current_view()
 
-    #     self._current_view = CompletedView()  # tähän attribuutit
+        self._current_view = CompletedView(
+            self._root, self._show_course_page_view, self._show_main_view)
 
-    #     self._current_view.pack()
+        self._current_view.pack()

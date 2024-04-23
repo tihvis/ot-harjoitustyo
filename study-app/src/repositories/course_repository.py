@@ -27,6 +27,16 @@ class CourseRepository:
 
         return self.create_course_object(courses)
 
+    def find_completed_courses_by_user_id(self, user_id):
+        cursor = self._connection.cursor()
+
+        cursor.execute(
+            "SELECT * FROM courses WHERE user_id = ? and done = ?", (user_id, 1))
+
+        courses = cursor.fetchall()
+
+        return self.create_course_object(courses)
+
     def get_max_points_by_course(self, course_id):
         cursor = self._connection.cursor()
 

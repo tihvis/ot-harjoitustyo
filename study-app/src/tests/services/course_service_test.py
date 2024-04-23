@@ -1,7 +1,7 @@
 import unittest
 from repositories.course_repository import course_repository
 from repositories.user_repository import user_repository
-from services.course_service import course_service, InvalidValuesError
+from services.course_service import course_service, InvalidValuesError, InvalidCompletionValuesError
 from services.user_service import user_service
 
 
@@ -150,13 +150,13 @@ class TestCourseService(unittest.TestCase):
         self.assertEqual(courses[2].user_id, user3.user_id)
         self.assertEqual(courses[2].name, c3.name)
 
-    def test_course_points_are_correct(self):
+    def test_course_points_are_correct_when_all_points_given(self):
         course = course_service.create_course(self.user.user_id,
                                               "Ohjelmistotekniikka", 5, self.max_points)
 
         self.assertEqual(course.max_points, self.max_points)
 
-    def test_missing_course_points_are_correct(self):
+    def test_course_points_are_correct_when_part_of_course_points_given(self):
         max_points = {1: 30, 3: 25, 4: 50}
         course = course_service.create_course(self.user.user_id,
                                               "Ohjelmistotekniikka", 5, max_points)
@@ -258,3 +258,39 @@ class TestCourseService(unittest.TestCase):
 
         self.assertEqual(course_service.get_completed_points_by_course(
             course.course_id)[1], completed_points[1])
+
+    def test_set_course_done_with_valid_values(self):
+        course = course_service.create_course(self.user.user_id,
+                                              "Ohjelmistotekniikka", 5, self.max_points)
+
+        course_service.set_done(course.course_id, 5, "20.04.2024")
+
+        self.assertEqual(
+            len(course_service.get_completed_courses_by_user_id(self.user.user_id)), 1)
+
+    def test_set_course_done_with_invalid_values(self):
+        course = course_service.create_course(self.user.user_id,
+                                              "Ohjelmistotekniikka", 5, self.max_points)
+
+        self.assertRaises(InvalidCompletionValuesError, lambda: course_service.set_done(
+            course.course_id, "Valitse", "20.04.2024"))
+
+        self.assertRaises(ValueError, lambda: course_service.set_done(
+            course.course_id, 5, "35.04.2024"))
+
+        self.assertRaises(ValueError, lambda: course_service.set_done(
+            course.course_id, 5, "testi"))
+
+    def test_set_one_course_done_and_one_ongoing(self):
+        course1 = course_service.create_course(self.user.user_id,
+                                               "Ohjelmistotekniikka", 4, self.max_points)
+
+        course_service.create_course(self.user.user_id,
+                                     "Tietorakenteet ja algoritmit", 10, self.max_points)
+
+        course_service.set_done(course1.course_id, 5, "20.04.2024")
+
+        self.assertEqual(
+            len(course_service.get_completed_courses_by_user_id(self.user.user_id)), 1)
+        self.assertEqual(
+            len(course_service.get_courses_by_user_id(self.user.user_id)), 1)
