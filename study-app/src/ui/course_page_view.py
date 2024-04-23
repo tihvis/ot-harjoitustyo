@@ -5,11 +5,11 @@ from services.user_service import user_service
 
 
 class CoursePageView:
-    def __init__(self, root, handle_return, course=None):
+    def __init__(self, root, handle_return_to_previous_page, course=None):
         self._root = root
         self._user = user_service.get_current_user()
         self._course = course
-        self._handle_return = handle_return
+        self._handle_return = handle_return_to_previous_page
         self._completed_points = {}
         self._max_points = {}
         self._frame = None
@@ -67,6 +67,10 @@ class CoursePageView:
             if self._other_entry and self._other_entry.get():
                 new_completed_points[7] = int(self._other_entry.get())
 
+            if len(new_completed_points) > 0:
+                course_service.update_course(
+                    self._course.course_id, new_completed_points)
+
             if self._done_value.get() == 1:
                 grade = self._grade.get()
                 completion_date = self._comp_date_entry.get()
@@ -74,9 +78,6 @@ class CoursePageView:
                 course_service.set_done(
                     self._course.course_id, grade, completion_date)
 
-            if len(new_completed_points) > 0:
-                course_service.update_course(
-                    self._course.course_id, new_completed_points)
             self._handle_return()
 
         except ValueError:

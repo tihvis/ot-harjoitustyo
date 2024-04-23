@@ -4,10 +4,10 @@ from services.user_service import user_service
 
 
 class AddCourseView:
-    def __init__(self, root, handle_return):
+    def __init__(self, root, handle_show_main_view):
         self._root = root
         self._user = user_service.get_current_user()
-        self._handle_return = handle_return
+        self._handle_show_main_view = handle_show_main_view
         self._frame = None
         self._name_entry = None
         self._ects_credits_entry = None
@@ -133,7 +133,7 @@ class AddCourseView:
             course_service.create_course(
                 user_id, name, ects_credits, max_points)
 
-            self._handle_return()
+            self._return_handler()
 
         except ValueError:
             self._show_error(
@@ -143,11 +143,8 @@ class AddCourseView:
             self._show_error(
                 "Kurssin nimen tulisi olla 1-50 merkkiä pitkä ja opintopisteiden kokonaislukuja välillä 0-50. Muut arvot voivat olla kokonaislukuja välillä 0-100.")
 
-    def _delete_course_handler(self):
-        pass
-
     def _return_handler(self):
-        self._handle_return()
+        self._handle_show_main_view()
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)

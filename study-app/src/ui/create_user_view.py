@@ -3,9 +3,9 @@ from services.user_service import user_service, UsernameExistsError, PasswordCon
 
 
 class CreateUserView:
-    def __init__(self, root, handle_create_user, handle_show_login_view):
+    def __init__(self, root, handle_show_main_view, handle_show_login_view):
         self._root = root
-        self._handle_create_user = handle_create_user
+        self._handle_show_main_view = handle_show_main_view
         self._handle_show_login_view = handle_show_login_view
         self._frame = None
         self._username_entry = None
@@ -29,7 +29,7 @@ class CreateUserView:
 
         try:
             user_service.create_user(username, password, password2)
-            self._handle_create_user()
+            self._handle_show_main_view()
 
         except UsernameExistsError:
             self._show_error(f"Käyttäjätunnus {username} on varattu.")

@@ -3,9 +3,9 @@ from services.user_service import user_service, InvalidCredentialsError
 
 
 class LoginView:
-    def __init__(self, root, handle_login, handle_show_create_user_view):
+    def __init__(self, root, handle_show_main_view, handle_show_create_user_view):
         self._root = root
-        self._handle_login = handle_login
+        self._handle_show_main_view = handle_show_main_view
         self._handle_show_create_user_view = handle_show_create_user_view
         self._frame = None
         self._username_entry = None
@@ -20,6 +20,9 @@ class LoginView:
 
     def destroy(self):
         self._frame.destroy()
+
+    def _handle_login(self):
+        self._handle_show_main_view()
 
     def _login_handler(self):
         username = self._username_entry.get()
