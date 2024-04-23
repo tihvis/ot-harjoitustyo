@@ -18,3 +18,9 @@
 - Etusivulle lisätty käynnissä olevien kurssien listaus ja "näytä/muokkaa" painikkeet.
 - Kurssisivulle lisätty listaus kyseisen kurssin tehtävistä, ja tieto niiden etenemisestä (eli suoritetut pisteet / max pisteet).
 - Kurssin poistaminen onnistuu kurssisivulta, ja käyttäjää pyydetään vahvistamaan poistaminen erikseen.
+
+## Viikko 5
+- Kurssisivulle lisätty mahdollisuus päivittää kurssin tehtävien pistekertymää.
+- Kurssisivulle lisätty mahdollisuus merkitä kurssi tehdyksi, ja lisätä sille arvosana sekä suorituspäivämäärä.
+- Suoritettujen kurssien näkymää aloitettu.
+- Testausta laajennettu ja koodin koheesiota paranneltu.

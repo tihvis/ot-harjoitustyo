@@ -9,4 +9,5 @@
 | 9.4. | 5    | korjattu bugeja metodeissa ja tiedonvälityksessä luokasta toiseen, ja aloitettu meneillään olevien kurssien näkymää |
 | 12.4. | 4    | kurssisivun näkymä, kurssin poistaminen, ulkoasun yhtenäistäminen|
 | 16.4. | 4    | kurssisivulle lisätty listaus kyseisen kurssin tehtävistä, sekä pistekertymä tähän asti versus maksimipisteet|
-| yht.  | 36   | | 
+| 22.4. | 7    | kurssisivulle lisätty kentät pisteiden päivittämistä varten, sekä kurssin merkitseminen suoritetuksi. Suoritettujen kurssien näkymää aloitettu. Testejä lisätty.|
+| yht.  | 43   | | 
