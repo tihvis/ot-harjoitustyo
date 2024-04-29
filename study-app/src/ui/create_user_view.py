@@ -3,7 +3,21 @@ from services.user_service import user_service, UsernameExistsError, PasswordCon
 
 
 class CreateUserView:
+    """Käyttäjän rekisteröitymisestä vastaava näkymä.
+    """
+
     def __init__(self, root, handle_show_main_view, handle_show_login_view):
+        """Luokan konstruktori, joka luo uuden rekisteröitymisnäkymän.
+
+        Args:
+            root:
+                TKinter-elementti, jonka sisään näkymä alustetaan.
+            handle_show_main_view:
+                Kutsuttava-arvo, jota kutsutaan kun käyttäjä luodaan ja siirretään etusivulle.
+            handle_show_login_view:
+                Kutsuttava-arvo, jota kutsutaan kun siirrytään takaisin kirjautumisnäkymään.
+        """
+
         self._root = root
         self._handle_show_main_view = handle_show_main_view
         self._handle_show_login_view = handle_show_login_view
@@ -17,9 +31,15 @@ class CreateUserView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän.
+        """
+
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Tuhoaa näkymän.
+        """
+
         self._frame.destroy()
 
     def _create_user_handler(self):

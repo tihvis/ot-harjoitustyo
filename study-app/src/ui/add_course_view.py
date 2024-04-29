@@ -4,7 +4,19 @@ from services.user_service import user_service
 
 
 class AddCourseView:
+    """Kurssin lisäämisestä vastaava näkymä.
+    """
+
     def __init__(self, root, handle_show_main_view):
+        """Luokan konstruktori, joka luo kurssin lisäyksen näkymän.
+
+        Args:
+            root:
+                TKinter-elementti, jonka sisään näkymä alustetaan.
+            handle_show_main_view:
+                Kutsuttava-arvo, jota kutsutaan kun käyttäjä tallentaa uuden kurssin ja palaa etusivulle, tai haluaa palata etusivulle ilman tallentamista.
+        """
+
         self._root = root
         self._user = user_service.get_current_user()
         self._handle_show_main_view = handle_show_main_view
@@ -24,9 +36,15 @@ class AddCourseView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän.
+        """
+
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Tuhoaa näkymän.
+        """
+
         self._frame.destroy()
 
     def _show_error(self, message):

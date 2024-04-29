@@ -4,7 +4,25 @@ from services.course_service import course_service
 
 
 class MainView:
+    """Etusivusta vastaava näkymä, mistä käyttäjä voi navigoida kurssin lisäämiseen, suoritettujen kurssien näkymään ja käynnissä olevien kurssien kurssisivuille.
+    """
+
     def __init__(self, root, handle_logout, handle_add_course, handle_show_course_page, handle_show_completed):
+        """Luokan konstruktori, joka luo etusivun näkymän.
+
+        Args:
+            root:
+                TKinter-elementti, jonka sisään näkymä alustetaan.
+            handle_logout:
+                Kutsuttava-arvo, jota kutsutaan kun käyttäjä kirjautuu ulos.
+            handle_add_course:
+                Kutsuttava-arvo, jota kutsutaan kun käyttäjä haluaa lisätä uuden kurssin.
+            handle_show_course_page:
+                Kutsuttava-arvo, jota kutsutaan kun käyttäjä haluaa nähdä kurssisivun. Saa argumenttina Course-olion.
+            handle_show_completed:
+                Kutsuttava-arvo, jota kutsutaan kun käyttäjä haluaa nähdä suorittamansa kurssit.
+        """
+
         self._root = root
         self._handle_logout = handle_logout
         self._handle_add_course = handle_add_course
@@ -18,9 +36,15 @@ class MainView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän.
+        """
+
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Tuhoaa näkymän.
+        """
+
         self._frame.destroy()
 
     def _logout_handler(self):
@@ -134,7 +158,21 @@ class MainView:
 
 
 class CourseListView:
+    """Käynnissä olevien kurssien listauksesta vastaava näkymä.
+    """
+
     def __init__(self, root, courses, handle_show_course_page):
+        """Luokan konstruktori, joka luo listausnäkymän käyttäjän käynnissä olevista kursseista.
+
+        Args:
+            root:
+                TKinter-elementti, jonka sisään näkymä alustetaan.
+            courses:
+                Lista Courses-olioita, jotka näkymässä näytetään
+            handle_show_course_page:
+                Kutsuttava-arvo, jota kutsutaan kun käyttäjä haluaa nähdä kurssisivun. Saa argumenttina Course-olion.
+        """
+
         self._root = root
         self._courses = courses
         self._handle_show_course_page = handle_show_course_page
@@ -143,9 +181,15 @@ class CourseListView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän.
+        """
+
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Tuhoaa näkymän.
+        """
+
         self._frame.destroy()
 
     def _initialize_course_item(self, course):

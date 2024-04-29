@@ -4,7 +4,21 @@ from services.course_service import course_service
 
 
 class CompletedView:
+    """Käyttäjän suoritettujen kurssien näkymästä vastaava luokka.
+    """
+
     def __init__(self, root, handle_show_course_page, handle_return):
+        """Luokan konstruktori, joka luo käyttäjän suoritettujen kurssien näkymän.
+
+        Args:
+            root:
+                TKinter-elementti, jonka sisään näkymä alustetaan.
+            handle_show_course_page:
+                Kutsuttava-arvo, jota kutsutaan kun käyttäjä haluaa nähdä kurssisivun. Saa argumenttina Course-olion.
+            handle_return:
+                Kutsuttava-arvo, jota kutsutaan kun käyttäjä haluaa palata takaisin edelliselle sivulle.
+        """
+
         self._root = root
         self._handle_show_course_page = handle_show_course_page
         self._handle_return = handle_return
@@ -16,9 +30,15 @@ class CompletedView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän.
+        """
+
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Tuhoaa näkymän.
+        """
+
         self._frame.destroy()
 
     def _return_handler(self):

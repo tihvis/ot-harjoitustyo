@@ -5,7 +5,21 @@ from services.user_service import user_service
 
 
 class CoursePageView:
+    """Kurssisivusta vastaava näkymä, jossa käyttäjä voi tarkastella ja muokata kurssin tehtäväpisteitä ja merkitä kurssin suoritetuksi.
+    """
+
     def __init__(self, root, handle_return_to_previous_page, course=None):
+        """Luokan konstruktori, joka luo kurssisivun näkymän.
+
+        Args:
+            root:
+                TKinter-elementti, jonka sisään näkymä alustetaan.
+            handle_return_to_previous_page:
+                Kutsuttava-arvo, jota kutsutaan kun käyttäjä haluaa palata takaisin edelliselle sivulle.
+            course:
+                Course-olio, joka vastaa sitä kurssia, jonka tietoja käyttäjä haluaa tarkastella ja muokata. Oletusarvo on None.
+        """
+
         self._root = root
         self._user = user_service.get_current_user()
         self._course = course
@@ -30,9 +44,15 @@ class CoursePageView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän.
+        """
+
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Tuhoaa näkymän.
+        """
+
         self._frame.destroy()
 
     def _show_error(self, message):

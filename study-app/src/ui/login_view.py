@@ -3,7 +3,21 @@ from services.user_service import user_service, InvalidCredentialsError
 
 
 class LoginView:
+    """Käyttäjän kirjautumisesta vastaava näkymä.
+    """
+
     def __init__(self, root, handle_show_main_view, handle_show_create_user_view):
+        """Luokan konstruktori, joka luo uuden kirjautumisnäkymän.
+
+        Args:
+            root:
+                TKinter-elementti, jonka sisään näkymä alustetaan.
+            handle_show_main_view:
+                Kutsuttava-arvo, jota kutsutaan kun käyttäjä kirjautuu sisään ja siirretään etusivulle.
+            handle_show_create_user_view:
+                Kutsuttava-arvo, jota kutsutaan kun siirrytään rekisteröitymisnäkymään.
+        """
+
         self._root = root
         self._handle_show_main_view = handle_show_main_view
         self._handle_show_create_user_view = handle_show_create_user_view
@@ -16,9 +30,15 @@ class LoginView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän.
+        """
+
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Tuhoaa näkymän.
+        """
+
         self._frame.destroy()
 
     def _handle_login(self):

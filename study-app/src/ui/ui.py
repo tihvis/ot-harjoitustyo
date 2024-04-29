@@ -7,11 +7,24 @@ from ui.completed_view import CompletedView
 
 
 class UI:
+    """Sovelluksen käyttöliittymästä vastaava luokka.
+    """
+
     def __init__(self, root):
+        """Luokan konstruktori, joka luo uuden käyttöliittymästä vastaavan luokan.
+
+        Args:
+            root:
+                TKinter-elementti, johon käyttöliittymä alustetaan.
+        """
+
         self._root = root
         self._current_view = None
 
     def start(self):
+        """Käynnistää käyttöliittymän.
+        """
+
         self._show_login_view()
 
     def _hide_current_view(self):
