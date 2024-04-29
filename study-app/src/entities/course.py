@@ -11,8 +11,7 @@ class Course:
             max_points: 
                 Sanakirja, joka kuvaa kurssin eri tehtävistä kertyviä maksimipistemääriä.
             completion: 
-                Sanakirja, joka kuvaa kurssin suoritustietoja: 
-                suorituspvm, arvosana, suoritettu.
+                Sanakirja, joka kuvaa kurssin suoritustietoja.
             course_id: 
                 Merkkijonoarvo, joka kuvaa kurssin id:tä.
     """
@@ -32,10 +31,14 @@ class Course:
                 Vapaaehtoinen, oletusarvoltaan None.
                 Sanakirja, joka kuvaa kurssin eri tehtävistä
                 kertyviä maksimipistemääriä.
+                Avaimina tehtävien id:t ja arvoina maksimipistemäärät.
             completion:
                 Vapaaehtoinen, oletusarvoltaan None.
-                Sanakirja, joka kuvaa kurssin suoritustietoja:
-                suorituspvm, arvosana, suoritettu.
+                Sanakirja, joka kuvaa kurssin suoritustietoja.
+                Avain-arvo parit:
+                    "done": Boolean (1=suoritettu, 0=kesken).
+                    "grade": Merkkijonoarvo, joka kuvaa arvosanaa.
+                    "completion_date": Merkkijonoarvo, joka kuvaa kurssin suorituspäivämäärää.
             course_id:
                 Vapaaehtoinen, oletusarvoltaan None.
                 Merkkijonoarvo, joka kuvaa kurssin id:tä.

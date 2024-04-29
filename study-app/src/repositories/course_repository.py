@@ -37,7 +37,8 @@ class CourseRepository:
         """Palauttaa käyttäjän käynnissäolevat kurssit käyttäjän id:n perusteella.
 
         Args:
-            user_id: Käyttäjän, jonka kurssit halutaan hakea, id.
+            user_id: 
+                Merkkijonoarvo, joka kuvaa käyttäjän, jonka kurssit halutaan hakea, id:tä.
 
         Returns:
             Palauttaa listan Course-olioita.
@@ -56,7 +57,8 @@ class CourseRepository:
         """Palauttaa käyttäjän suoritetut kurssit käyttäjän id:n perusteella.
 
         Args:
-            user_id: Käyttäjän, jonka kurssit halutaan hakea, id.
+            user_id: 
+                Merkkijonoarvo, joka kuvaa käyttäjän, jonka kurssit halutaan hakea, id:tä.
 
         Returns:
             Palauttaa listan Course-olioita.
@@ -75,7 +77,8 @@ class CourseRepository:
         """Palauttaa kurssin tehtävien maksimipistemäärät kurssin id:n perusteella.
 
         Args:
-            course_id: Kurssin, jonka tehtävien maksimipistemäärät halutaan hakea, id.
+            course_id: 
+                Merkkijonoarvo, joka kuvaa kurssin, jonka tehtävien maksimipistemäärät halutaan hakea, id:tä.
 
         Returns:
             Palauttaa sanakirjan, jossa avaimina ovat tehtävien id:t ja arvoina maksimipistemäärät.
@@ -94,7 +97,9 @@ class CourseRepository:
         """Palauttaa kurssin tehtävien suoritettujen pisteiden määrät kurssin id:n perusteella.
 
         Args:
-            course_id: Kurssin, jonka tehtävien suoritettujen pisteiden määrät halutaan hakea, id.
+            course_id: 
+                Merkkijonoarvo, joka kuvaa kurssin, jonka tehtävien
+                suoritettujen pisteiden määrät halutaan hakea, id:tä.
 
         Returns:
             Palauttaa sanakirjan, jossa avaimina ovat tehtävien id:t ja arvoina pistemäärät.
@@ -113,7 +118,8 @@ class CourseRepository:
         """Palauttaa kurssin suoritustiedot kurssin id:n perusteella.
 
         Args:
-            course_id: Kurssin, jonka suoritustiedot halutaan hakea, id.
+            course_id: 
+                Merkkijonoarvo, joka kuvaa kurssin, jonka suoritustiedot halutaan hakea, id:tä.
 
         Returns:
             Palauttaa sanakirjan, jossa avaimina ovat done, grade ja completion_date.
@@ -136,7 +142,8 @@ class CourseRepository:
         """Luo Course-olioita tietokannasta haetuista tiedoista.
 
         Args:
-            courses: Lista tietokannasta haetuista tiedoista.
+            courses: 
+                Lista tietokannasta haetuista tiedoista.
 
         Returns:
             Palauttaa listan Course-olioita.
@@ -156,7 +163,8 @@ class CourseRepository:
         """Tallentaa uuden kurssin tietokantaan.
 
         Args:
-            course: Course-olio, joka kuvaa tallennettavaa kurssia.
+            course: 
+                Course-olio, joka kuvaa tallennettavaa kurssia.
 
         Returns:
             Palauttaa tallennetun Course-olion.
@@ -188,9 +196,10 @@ class CourseRepository:
         """Päivittää kurssin suoritettuja pisteitä tietokantaan.
 
         Args:
-            course_id: Kurssin id.
-            completed_points: Sanakirja, jossa avaimina ovat tehtävien id:t 
-            ja arvoina suoritetut pisteet.
+            course_id: 
+                Merkkijono, joka kuvaa päivitettävän kurssin id:tä.
+            completed_points: 
+                Sanakirja, jossa avaimina ovat tehtävien id:t ja arvoina suoritetut pisteet.
         """
 
         cursor = self._connection.cursor()
@@ -208,9 +217,12 @@ class CourseRepository:
         ja suorituspäivän tietokantaan.
 
         Args:
-            course_id: Suoritetun kurssin id.
-            grade: Suoritetun kurssin arvosana.
-            completion_date: Suoritetun kurssin suorituspäivämäärä.
+            course_id: 
+                Merkkijonoarvo, joka kuvaa suoritetun kurssin id:tä.
+            grade: 
+                Merkkijonoarvo, joka kuvaa suoritetun kurssin arvosanaa.
+            completion_date: 
+                Merkkijonoarvo, joka kuvaa suoritetun kurssin suorituspäivämäärää.
         """
 
         cursor = self._connection.cursor()
@@ -225,7 +237,8 @@ class CourseRepository:
         """Poistaa kurssin tietokannasta.
 
         Args:
-            course_id: Poistettavan kurssin id.
+            course_id: 
+                Merkkijonoarvo, joka kuvaa poistettavan kurssin id:tä.
         """
 
         cursor = self._connection.cursor()

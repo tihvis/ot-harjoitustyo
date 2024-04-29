@@ -39,7 +39,8 @@ class UserRepository:
         """Palauttaa käyttäjän käyttäjätunnuksen perusteella.
 
         Args:
-            username: Käyttäjätunnus, jonka käyttäjä palautetaan.
+            username: 
+                Merkkijonoarvo, joka kuvaa käyttäjätunnusta jonka käyttäjä palautetaan.
 
         Returns:
             Palauttaa User-olion, jos käyttäjätunnuksen omaava 
@@ -61,7 +62,8 @@ class UserRepository:
         """Tallentaa uuden käyttäjän tietokantaan.
 
         Args:
-            user: User-olio, joka kuvaa tallennettavaa käyttäjää.
+            user: 
+                User-olio, joka kuvaa tallennettavaa käyttäjää.
 
         Returns:
             Palauttaa tallennetun User-olion.
