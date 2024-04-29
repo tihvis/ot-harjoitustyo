@@ -78,7 +78,8 @@ class CourseRepository:
 
         Args:
             course_id: 
-                Merkkijonoarvo, joka kuvaa kurssin, jonka tehtävien maksimipistemäärät halutaan hakea, id:tä.
+                Merkkijonoarvo, joka kuvaa kurssin, jonka tehtävien
+                maksimipistemäärät halutaan hakea, id:tä.
 
         Returns:
             Palauttaa sanakirjan, jossa avaimina ovat tehtävien id:t ja arvoina maksimipistemäärät.
