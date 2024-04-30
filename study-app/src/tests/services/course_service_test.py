@@ -294,3 +294,89 @@ class TestCourseService(unittest.TestCase):
             len(course_service.get_completed_courses_by_user_id(self.user.user_id)), 1)
         self.assertEqual(
             len(course_service.get_courses_by_user_id(self.user.user_id)), 1)
+
+    def test_check_completed_credits_when_no_completed_courses(self):
+        self.assertEqual(course_service.get_completed_credits_by_user_id(
+            self.user.user_id), 0)
+
+    def test_check_completed_credits_when_one_completed_course(self):
+        course = course_service.create_course(self.user.user_id,
+                                              "Ohjelmistotekniikka", 5, self.max_points)
+
+        course_service.set_done(course.course_id, 5, "20.04.2024")
+
+        self.assertEqual(course_service.get_completed_credits_by_user_id(
+            self.user.user_id), 5)
+
+    def test_check_completed_credits_when_multiple_completed_courses(self):
+        course1 = course_service.create_course(self.user.user_id,
+                                               "Ohjelmistotekniikka", 5, self.max_points)
+
+        course2 = course_service.create_course(self.user.user_id,
+                                               "Tietorakenteet ja algoritmit", 7, self.max_points)
+
+        course_service.set_done(course1.course_id, 5, "30.04.2024")
+        course_service.set_done(course2.course_id, 7, "29.04.2024")
+
+        self.assertEqual(course_service.get_completed_credits_by_user_id(
+            self.user.user_id), 12)
+
+    def test_check_completed_credits_when_one_completed_course_and_one_ongoing(self):
+        course1 = course_service.create_course(self.user.user_id,
+                                               "Ohjelmistotekniikka", 5, self.max_points)
+
+        course_service.set_done(course1.course_id, 5, "25.04.2024")
+
+        course_service.create_course(self.user.user_id,
+                                     "Tietorakenteet ja algoritmit", 7, self.max_points)
+
+        self.assertEqual(course_service.get_completed_credits_by_user_id(
+            self.user.user_id), 5)
+
+    def test_check_completed_credits_with_failed_course(self):
+        course = course_service.create_course(self.user.user_id,
+                                              "Ohjelmistotekniikka", 5, self.max_points)
+
+        course_service.set_done(course.course_id, "Hylätty", "25.04.2024")
+
+        self.assertEqual(course_service.get_completed_credits_by_user_id(
+            self.user.user_id), 0)
+
+    def test_check_average_grade_with_no_completed_courses(self):
+        self.assertEqual(course_service.average_of_completed_courses_by_user_id(
+            self.user.user_id), 0)
+
+    def test_check_average_grade_with_one_completed_course(self):
+        course = course_service.create_course(self.user.user_id,
+                                              "Ohjelmistotekniikka", 5, self.max_points)
+
+        course_service.set_done(course.course_id, 5, "25.04.2024")
+
+        self.assertEqual(course_service.average_of_completed_courses_by_user_id(
+            self.user.user_id), 5)
+
+    def test_check_average_grade_with_completed_course_with_no_grade(self):
+        course = course_service.create_course(self.user.user_id,
+                                              "Ohjelmistotekniikka", 5, self.max_points)
+
+        course_service.set_done(course.course_id, "Hyväksytty", "25.04.2024")
+
+        self.assertEqual(course_service.average_of_completed_courses_by_user_id(
+            self.user.user_id), 0)
+
+    def test_check_average_grade_with_multiple_completed_courses(self):
+        course1 = course_service.create_course(self.user.user_id,
+                                               "Ohjelmistotekniikka", 5, self.max_points)
+
+        course2 = course_service.create_course(self.user.user_id,
+                                               "Tietorakenteet ja algoritmit", 5, self.max_points)
+
+        course3 = course_service.create_course(self.user.user_id,
+                                               "Tietokoneen toiminta", 2, self.max_points)
+
+        course_service.set_done(course1.course_id, 5, "25.04.2020")
+        course_service.set_done(course2.course_id, 3, "25.04.2021")
+        course_service.set_done(course3.course_id, "Hyväksytty", "25.04.2022")
+
+        self.assertEqual(course_service.average_of_completed_courses_by_user_id(
+            self.user.user_id), 4)

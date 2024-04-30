@@ -136,6 +136,48 @@ class CourseService:
 
         return self._course_repository.find_completed_courses_by_user_id(user_id)
 
+    def get_completed_credits_by_user_id(self, user_id):
+        """Palauttaa käyttäjän suorittamat opintopisteet käyttäjän id:n perusteella.
+
+        Args:
+            user_id: 
+                Merkkijonoarvo, joka kuvaa käyttäjän id:tä.
+
+        Returns:
+            Kokonaisluku, joka kuvaa käyttäjän suorittamia opintopisteitä.
+        """
+        total_credits = 0
+
+        for course in self._course_repository.find_completed_courses_by_user_id(user_id):
+            if course.completion["grade"] != "Hylätty":
+                total_credits += course.ects_credits
+
+        return total_credits
+
+    def average_of_completed_courses_by_user_id(self, user_id):
+        """Palauttaa käyttäjän suorittamien kurssien keskiarvon käyttäjän id:n perusteella.
+
+        Args:
+            user_id: 
+                Merkkijonoarvo, joka kuvaa käyttäjän id:tä.
+
+        Returns:
+            Liukuluku, joka kuvaa käyttäjän suorittamien kurssien keskiarvoa.
+        """
+
+        total_grades = 0
+        total_credits = 0
+
+        for course in self._course_repository.find_completed_courses_by_user_id(user_id):
+            if isinstance(course.completion["grade"], int):
+                total_credits += course.ects_credits
+                total_grades += course.completion["grade"] * course.ects_credits
+
+        if total_credits == 0:
+            return 0
+
+        return round(total_grades / total_credits, 2)
+
     def delete_course(self, course_id):
         """Poistaa kurssin sen id:n perusteella.
 

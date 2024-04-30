@@ -48,7 +48,16 @@ class CompletedView:
         self._handle_show_course_page(course)
 
     def _initialize_header(self):
-        info_text = "Alla näet listauksen suorittamistasi kursseista. Pääset näkemään kurssin tarkemmat tiedot painamalla 'Näytä/muokkaa' -painiketta."
+        total_credits = course_service.get_completed_credits_by_user_id(
+            self._user.user_id)
+
+        average_grade = course_service.average_of_completed_courses_by_user_id(
+            self._user.user_id)
+
+        info_text = f"Alla näet listauksen suorittamistasi kursseista. Pääset näkemään kurssin tarkemmat tiedot painamalla 'Näytä/muokkaa' -painiketta.\n\nOlet tähän asti suorittanut hyväksytysti yhteensä {total_credits} opintopistettä."
+
+        if average_grade != 0:
+            info_text += f" Suoritettujen kurssien painotettu keskiarvo on {average_grade}."
 
         info = ttk.Label(master=self._frame, text=info_text, wraplength=400)
 
