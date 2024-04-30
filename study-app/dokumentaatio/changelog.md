@@ -26,6 +26,8 @@
 - Testausta laajennettu ja koodin koheesiota paranneltu.
 
 ## Viikko 6
-- Lisätty docstringit.
 - Suoritettujen kurssien näkymään lisätty hyväksytysti suoritettujen kurssien opintopistemäärä ja keskiarvo.
 - Testejä lisätty.
+- Lisätty docstringit.
+- Käyttöohje tehty, ja arkkitehtuurikuvausta jatkettu.
+- Päivitetty luokkien sisäisiä metodeja yksityisiksi.

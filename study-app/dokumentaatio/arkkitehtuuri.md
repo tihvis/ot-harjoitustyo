@@ -147,3 +147,41 @@ Kun sisäänkirjautunut käyttäjä on lisännyt uuden kurssin itselleen, hän p
     CourseService ->> CourseRepository: update(course_id, {1: 5, 5: 2})
     UI ->> UI: handle_show_main_view()
 ```
+
+### Kurssin merkitseminen suoritetuksi
+
+Kun kurssi on suoritettu, käyttäjä voi merkitä sen suoritetuksi kurssisivulta ruksaamalla "Merkitse suoritetuksi"-laatikko, ja täyttämällä saatu arvosana ja kurssin suorituspäivämäärä. Kun käyttäjä klikkaa painiketta "Tallenna muutokset", sovelluksen kontrolli etenee seuraavasti:
+
+```mermaid
+ sequenceDiagram
+    actor Käyttäjä
+    participant UI
+    participant CourseService
+    participant CourseRepository
+
+    Käyttäjä ->> UI: click "Tallenna muutokset"
+    UI ->> CourseService: set_done(course_id, grade, completion_date)
+    CourseService ->> CourseService: completion_values_ok(grade, completion_date)
+    CourseService ->> CourseRepository: set_done(course_id, grade, completion_date)
+    UI ->> UI: handle_return()
+```
+
+
+### Kurssin poistaminen
+
+Käyttäjä voi poistaa käynnissäolevan tai suoritetun kurssin kyseisen kurssin kurssisivulta painamalla "Poista kurssi"-painiketta. Sovelluksen kontrolli etenee silloin seuraavanlaisesti:
+
+```mermaid
+ sequenceDiagram
+    actor Käyttäjä
+    participant UI
+    participant CourseService
+    participant CourseRepository
+
+    Käyttäjä ->> UI: click "Poista kurssi"
+    UI ->> UI: confirm_deletion()
+    Käyttäjä ->> UI: click "OK"
+    UI ->> CourseService: delete_course(course_id)
+    CourseService ->> CourseRepository: delete_course(course_id)
+    UI ->> UI: handle_return()
+```

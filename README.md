@@ -7,9 +7,10 @@ Opintojen etenemistä havainnollistava sovellus, jonka avulla opiskelijat voivat
 ## Dokumentaatio
 
 - [Vaatimusmäärittely](/study-app/dokumentaatio/vaatimusmaarittely.md)
+- [Arkkitehtuurikuvaus](/study-app/dokumentaatio/arkkitehtuuri.md)
+- [Käyttöohje](/study-app/dokumentaatio/kayttoohje.md)
 - [Työaikakirjanpito](/study-app/dokumentaatio/tuntikirjanpito.md)
 - [Changelog](/study-app/dokumentaatio/changelog.md)
-- [Arkkitehtuurikuvaus](/study-app/dokumentaatio/arkkitehtuuri.md)
 
 ## Asennus
 
