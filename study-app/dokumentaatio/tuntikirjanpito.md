@@ -12,4 +12,5 @@
 | 22.4. | 7    | kurssisivulle lisätty kentät pisteiden päivittämistä varten, sekä kurssin merkitseminen suoritetuksi. Suoritettujen kurssien näkymää aloitettu. Testejä lisätty.|
 | 23.4. | 1    | Suoritettujen kurssien näkymää paranneltu.|
 | 29.4. | 4    | Docstringit lisätty.|
-| yht.  | 48   | | 
+| 30.4. | 4    | Suoritettujen kurssien näkymää paranneltu (lisätty keskiarvo ja opintopisteet) + niihin liittyvät testit.|
+| yht.  | 52   | | 
