@@ -171,7 +171,8 @@ class CourseService:
         for course in self._course_repository.find_completed_courses_by_user_id(user_id):
             if isinstance(course.completion["grade"], int):
                 total_credits += course.ects_credits
-                total_grades += course.completion["grade"] * course.ects_credits
+                total_grades += course.completion["grade"] * \
+                    course.ects_credits
 
         if total_credits == 0:
             return 0
