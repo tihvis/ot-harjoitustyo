@@ -69,9 +69,9 @@ Sovellus aukeaa kirjautumisnäkymään.
   - :white_check_mark: Käyttäjä voi poistaa kyseisen kurssin suorituksen.
 
 - :hourglass_flowing_sand: Käyttäjä voi nähdä listan omista suoritetuista kursseistaan.
-  - Listauksessa näkyy montako kurssia ja opintopistettä tähän asti on suoritettu, ja mikä suoritettujen kurssien keskiarvo on.
+  - :white_check_mark: Näkymässä näkyy montako kurssia ja opintopistettä tähän asti on suoritettu, ja mikä suoritettujen kurssien keskiarvo on.
   - :white_check_mark: Listauksessa näkyy lisäksi suoritettujen kurssien nimet, suorituspäivät, opintopisteet ja arvosana.
-  - Listalla olevien suoritettujen kurssien tietoja pääsee muokkaamaan. Tämä on hyödyllistä, jos käyttäjä haluaa esimerkiksi myöhemmin uusia kurssin kokeen ja korottaa sen arvosanaa.
+  - :hourglass_flowing_sand: Listalla olevien suoritettujen kurssien tietoja pääsee muokkaamaan. Tämä on hyödyllistä, jos käyttäjä haluaa esimerkiksi myöhemmin uusia kurssin kokeen ja korottaa sen arvosanaa.
 
 - :sunglasses: Käyttäjä voi kirjautua ulos.
   - :white_check_mark: Uloskirjautumisen jälkeen käyttäjä ohjataan sisäänkirjautumissivulle.
