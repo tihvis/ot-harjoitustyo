@@ -55,21 +55,21 @@ class AddCourseView:
         self._error_label.grid_remove()
 
     def _initialize_header(self):
-        info_text = "Lisää uusi kurssi syöttämällä sen nimi, opintopisteet sekä kurssin arviontiin vaikuttavien tehtävien maksimipistemäärät. Voit jättää pistekentät tyhjiksi, mikäli kurssilla ei ole kyseisiä tehtävätyyppejä."
+        info_text = "Lisää uusi kurssi syöttämällä sen nimi, opintopisteet sekä kurssin arviontiin vaikuttavien tehtävien maksimipistemäärät. Voit jättää pistekentät tyhjiksi, mikäli kurssilla ei ole kyseisiä tehtävätyyppejä.\n\nPakolliset kentät on merkitty tähdellä. Syötä opintopisteiden ja tehtävien pistemäärät kokonaislukuina. Tehtävistä kertyvät maksimipistemäärät voivat olla välillä 0-100."
 
         info = ttk.Label(master=self._frame, text=info_text, wraplength=500)
 
         info.grid(padx=10, pady=10, sticky=constants.EW)
 
     def _initialize_course_info_fields(self):
-        name_label = ttk.Label(master=self._frame, text="Nimi:")
+        name_label = ttk.Label(master=self._frame, text="Nimi (1-50 merkkiä): *")
         self._name_entry = ttk.Entry(master=self._frame)
 
         name_label.grid(padx=10, pady=5, sticky=constants.W)
         self._name_entry.grid(padx=10, pady=5, sticky=constants.EW)
 
         ects_credits_label = ttk.Label(
-            master=self._frame, text="Opintopisteet:")
+            master=self._frame, text="Opintopisteet (0-50): *")
         self._ects_credits_entry = ttk.Entry(master=self._frame)
 
         ects_credits_label.grid(padx=10, pady=5, sticky=constants.W)
@@ -155,11 +155,11 @@ class AddCourseView:
 
         except ValueError:
             self._show_error(
-                "Opintopisteiden ja tehtävien määrän tulee olla kokonaislukuja.")
+                "Opintopisteiden ja tehtävien määrän tulee olla kokonaislukuja. Opintopisteet-kenttä on pakollinen.")
 
         except InvalidValuesError:
             self._show_error(
-                "Kurssin nimen tulisi olla 1-50 merkkiä pitkä ja opintopisteiden kokonaislukuja välillä 0-50. Muut arvot voivat olla kokonaislukuja välillä 0-100.")
+                "Kurssin nimen tulee olla 1-50 merkkiä pitkä ja opintopisteiden kokonaislukuja välillä 0-50. Tehtäväpisteiden arvot tulee olla kokonaislukuja välillä 0-100.")
 
     def _return_handler(self):
         self._handle_show_main_view()

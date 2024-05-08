@@ -61,7 +61,7 @@ class MainView:
         self._handle_show_completed()
 
     def _initialize_header(self):
-        info_text = "Alla näet listauksen tällä hetkellä käynnissä olevista kursseistasi. Voit muokata kurssin tietoja tai merkitä kurssin suoritetuksi painamalla 'Näytä/muokkaa' -painiketta."
+        info_text = "Tervetula Sisukas-sovellukseen!\n\nAlla näet listauksen tällä hetkellä käynnissä olevista kursseistasi, mikäli olet ehtinyt lisäämään niitä järjestelmään. Voit muokata kurssin tietoja tai merkitä kurssin suoritetuksi painamalla 'Näytä/muokkaa' -painiketta.\n\nUuden kurssin lisääminen ja jo suoritettujen kurssien tarkastelu onnistuu alla olevien painikkeiden avulla."
 
         info = ttk.Label(master=self._frame, text=info_text, wraplength=400)
 

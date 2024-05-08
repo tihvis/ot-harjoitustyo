@@ -132,7 +132,7 @@ class CoursePageView:
         course_info_label.grid(row=1, column=0, columnspan=3, padx=10,
                                pady=10, sticky=constants.EW)
 
-        info_text = "Alla näet kurssin tehtävät, sekä tämänhetkisen pistekertymän maksimipisteistä. Pääset päivittämään pistekertymää merkitsemällä uuden kokonaispistemäärän tekstikenttään, ja painamalla 'Tallenna muutokset'.\n\nMikäli merkitset kurssin suoritetuksi, valitse kurssin arvosana ja täytä suorituspäivämäärä muodossa pp.kk.vvvv."
+        info_text = "Alla näet kurssin tehtävät, sekä montako pistettä olet kyseisistä osioista suorittanut tähän mennessä. Voit päivittää pistekertymiä alla olevien kenttien avulla, ja painamalla 'Tallenna muutokset'.\n\nMikäli merkitset kurssin suoritetuksi, valitse lisäksi kurssin arvosana ja täytä kurssin suorituspäivämäärä muodossa pp.kk.vvvv. Pääset tarvittaessa vielä muokkaamaan kurssin pistekertymiä, arvosanaa ja suorituspäivämäärää myös sen jälkeen, kun kurssi on merkitty suoritetuksi."
 
         info_text_label = ttk.Label(
             master=self._frame,

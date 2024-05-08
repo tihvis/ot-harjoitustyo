@@ -54,10 +54,10 @@ class CompletedView:
         average_grade = course_service.average_of_completed_courses_by_user_id(
             self._user.user_id)
 
-        info_text = f"Alla näet listauksen suorittamistasi kursseista. Pääset näkemään kurssin tarkemmat tiedot painamalla 'Näytä/muokkaa' -painiketta.\n\nOlet tähän asti suorittanut hyväksytysti yhteensä {total_credits} opintopistettä."
+        info_text = f"Alla näet listauksen suorittamistasi kursseista. Pääset näkemään kurssin tarkemmat tiedot painamalla 'Näytä/muokkaa' -painiketta.\n\nOlet tähän asti suorittanut hyväksytysti yhteensä {total_credits}op.\n\n"
 
         if average_grade != 0:
-            info_text += f" Suoritettujen kurssien painotettu keskiarvo on {average_grade}."
+            info_text += f"Suoritettujen kurssien painotettu keskiarvo on {average_grade}.\n\n"
 
         info = ttk.Label(master=self._frame, text=info_text, wraplength=400)
 

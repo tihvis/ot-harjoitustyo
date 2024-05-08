@@ -73,7 +73,7 @@ class CreateUserView:
         self._error_label.grid_remove()
 
     def _initialize_header(self):
-        info_text = "Käyttäjätunnuksen tulee olla 4-30 merkkiä pitkä, ja salasanan 8-30 merkkiä pitkä. Salasanassa tulee olla vähintään yksi iso kirjain ja numero."
+        info_text = "Käyttäjätunnuksen tulee olla 4-30 merkkiä pitkä, ja salasanan 8-30 merkkiä pitkä. Salasanassa tulee olla vähintään yksi iso kirjain, yksi pieni kirjain ja yksi numero."
 
         info = ttk.Label(master=self._frame, text=info_text, wraplength=400)
 
