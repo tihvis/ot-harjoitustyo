@@ -1,6 +1,6 @@
 # Sisukas
 
-Opintojen etenemistä havainnollistava sovellus, jonka avulla opiskelijat voivat pitää kirjaa meneillään olevista kursseistaan, sekä nähdä katsauksen jo suoritetuista kursseistaan.
+Opintojen etenemistä havainnollistava sovellus, jonka avulla opiskelijat voivat pitää kirjaa meneillään olevista kursseista ja niiden etenemisestä, sekä nähdä katsauksen jo suoritetuista kursseistaan.
 
 ## Releaset
 - [Viikko 5](https://github.com/tihvis/ot-harjoitustyo/releases/tag/viikko5)
@@ -8,9 +8,10 @@ Opintojen etenemistä havainnollistava sovellus, jonka avulla opiskelijat voivat
 
 ## Dokumentaatio
 
+- [Käyttöohje](/study-app/dokumentaatio/kayttoohje.md)
 - [Vaatimusmäärittely](/study-app/dokumentaatio/vaatimusmaarittely.md)
 - [Arkkitehtuurikuvaus](/study-app/dokumentaatio/arkkitehtuuri.md)
-- [Käyttöohje](/study-app/dokumentaatio/kayttoohje.md)
+- [Testausdokumentti](/study-app/dokumentaatio/testaus.md)
 - [Työaikakirjanpito](/study-app/dokumentaatio/tuntikirjanpito.md)
 - [Changelog](/study-app/dokumentaatio/changelog.md)
 
