@@ -5,6 +5,7 @@ Opintojen etenemistä havainnollistava sovellus, jonka avulla opiskelijat voivat
 ## Releaset
 - [Viikko 5](https://github.com/tihvis/ot-harjoitustyo/releases/tag/viikko5)
 - [Viikko 6](https://github.com/tihvis/ot-harjoitustyo/releases/tag/viikko6)
+- [Loppupalautus](https://github.com/tihvis/ot-harjoitustyo/releases/tag/viikko7)
 
 ## Dokumentaatio
 
