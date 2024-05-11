@@ -74,6 +74,6 @@ Kurssin voi myös poistaa painamalla "Poista kurssi"-painiketta, jolloin sovellu
 
 Kun kurssi on merkitty suoritetuksi, se tulee näkyviin suoritettujen kurssien näkymään, johon pääsee etusivulta "Suoritetut kurssit"-painikkeesta. Sivulla näkyy listattuna käyttäjän suoritetut kurssit, sekä hyväksytysti suoritettujen kurssien opintopisteet, sekä niiden pohjalta laskettu painotettu keskiarvo.
 
-Käyttäjä voi halutessaanvielä tarkastella tai muokata kurssin tietoja painamalla "Näytä/muokkaa"-painiketta, jolloin sovellus ohjautuu kyseisen kurssin kurssisivulle.
+Käyttäjä voi halutessaan vielä tarkastella tai muokata kurssin tietoja painamalla "Näytä/muokkaa"-painiketta, jolloin sovellus ohjautuu kyseisen kurssin kurssisivulle.
 
 ![Suoritetut kurssit](kuvat/ohje_suoritetut.png)

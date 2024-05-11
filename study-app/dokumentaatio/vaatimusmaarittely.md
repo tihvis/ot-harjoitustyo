@@ -6,14 +6,14 @@ Sovelluksen avulla käyttäjä voi seurata ja pitää kirjaa omien opintojensa e
 
 ## Käyttöliittymäluonnos
 
-Sovellus koostuu viidestä eri näkymästä.
+Sovellus koostuu kuudesta eri näkymästä.
 
 ![](./kuvat/kayttoliittyma-hahmotelma.png)
 
 Sovellus aukeaa kirjautumisnäkymään.
 
 **Kirjautuminen**:
-* käyttäjä voi siirtyä onnistumisen kirjautumisen jälkeen etusivulle.
+* käyttäjä voi siirtyä onnistuneen kirjautumisen jälkeen etusivulle.
 * käyttäjä voi siirtyä uuden käyttäjätunnuksen luomiseen.
 
 **Uusi käyttäjä**:
@@ -23,7 +23,10 @@ Sovellus aukeaa kirjautumisnäkymään.
 * listaus käyttäjän käynnissä olevista kursseista, ja mahdollisuus avata jokaisesta tarkempi kurssinäkymä.
 * painike uuden kurssin lisäämistä varten.
 * painike, josta pääsee suoritettujen kurssien näkymään.
-* uloskirjautumispainike, joka ohjaa takaisin kirjautumissivulle.
+* uloskirjautumispainike, joka kirjaa käyttäjän ulos ja ohjaa takaisin kirjautumissivulle.
+
+**Uusi kurssi**:
+* käyttäjä voi tallentaa uuden kurssin sovellukseen täyttämällä sen nimen, opintopisteet ja mahdolliset tehtäväkohtaiset maksimipisteet.
 
 **Kurssinäkymä**:
 * käyttäjä voi nähdä montako pistettä jokaisesta kurssin osa-alueesta on suoritettu tähän asti, ja muokata suoritettujen pisteiden määrää.
@@ -31,50 +34,46 @@ Sovellus aukeaa kirjautumisnäkymään.
 * käyttäjä voi poistaa kurssin.
 
 **Suoritetut**:
-* suoritettujen kurssien ja opintopisteiden määrä ja keskiarvo.
-* mahdollisuus siirtyä muokkaamaan/tarkastelemaan kurssin sisältöä.
+* hyväksytysti suoritettujen opintopisteiden määrä ja keskiarvo.
+* listaus suoritetuista kursseista.
+* mahdollisuus siirtyä muokkaamaan/tarkastelemaan suoritetun kurssin sisältöä.
 * painike etusivulle.
 
 ## Perusversion tarjoama toiminnallisuus
 
-:sunglasses: = koko toiminnallisuus valmis
-
-:white_check_mark: = osio valmis
-
-:hourglass_flowing_sand: = työn alla
-
+:sunglasses: = koko toiminnallisuus valmis ja testattu
 
 ### Ennen kirjautumista
 
 - :sunglasses: Käyttäjä voi luoda järjestelmään käyttäjätunnuksen.
-  - :white_check_mark: Käyttäjätunnuksen täytyy olla uniikki ja pituudeltaan vähintään 4 merkkiä.
-  - :white_check_mark: Salasanan tulee olla vähintään 8 merkkiä pitkä, sisältäen vähintään yhden ison kirjaimen ja yhden numeron.
-  - :white_check_mark: Mikäli käyttäjätunnus tai salasana eivät täytä vaadittuja kriteereitä, käyttäjälle tulee tästä ilmoitus.
+  - Käyttäjätunnuksen täytyy olla uniikki ja pituudeltaan vähintään 4 merkkiä.
+  - Salasanan tulee olla vähintään 8 merkkiä pitkä, sisältäen vähintään yhden ison kirjaimen ja yhden numeron.
+  - Mikäli käyttäjätunnus tai salasana eivät täytä vaadittuja kriteereitä, käyttäjälle tulee tästä ilmoitus.
 - :sunglasses: Käyttäjä voi kirjautua järjestelmään.
-  - :white_check_mark: Kirjautuminen onnistuu olemassaolevalla käyttäjätunnuksella ja salasanalla.
-  - :white_check_mark: Käyttäjälle tulee virheilmoitus, mikäli käyttäjätunnusta ei olemassa, tai syötetty salasana on väärin.
+  - Kirjautuminen onnistuu olemassaolevalla käyttäjätunnuksella ja salasanalla.
+  - Käyttäjälle tulee virheilmoitus, mikäli käyttäjätunnusta ei olemassa, tai syötetty salasana on väärin.
 
 ### Kirjautumisen jälkeen
 
 - :sunglasses: Käyttäjä näkee etusivulla listattuna hänen tällä hetkellä käynnissä olevat kurssit.
-  - :white_check_mark: Jokaisen kurssin kohdalla on "Näytä/muokkaa"-painike, jota painamalla avautuu kyseisen kurssin oma kurssisivu.
+  - Jokaisen kurssin kohdalla on "Näytä/muokkaa"-painike, jota painamalla avautuu kyseisen kurssin oma kurssisivu.
 
 - :sunglasses: Käyttäjä voi lisätä uuden oman suoritetun/käynnissä olevan kurssin järjestelmään.
-  - :white_check_mark: Kurssin tietoihin saa tallennettua kurssin nimen, opintopistemäärän, sekä tiedot siitä, mistä eri osa-alueista (esim. tehtävät/harjoitustyö/koe/vertaisarviot, yms) kurssin suoritus koostuu.
-  - :white_check_mark: Käyttäjä saa lisättyä jokaisen osa-alueen kohdalle niiden tuomat maksimipisteet.
+  - Kurssin tietoihin saa tallennettua kurssin nimen, opintopistemäärän, sekä tiedot siitä, mistä eri osa-alueista (esim. tehtävät/harjoitustyö/koe/vertaisarviot, yms) kurssin suoritus koostuu.
+  - Käyttäjä saa lisättyä jokaisen osa-alueen kohdalle niiden tuomat maksimipisteet.
 
 - :sunglasses: Käyttäjä voi päivittää omien käynnissä olevien kurssien etenemistä.
-  - :white_check_mark: Käyttäjä voi merkitä reaaliaikaisesti kurssin pistekertymän etenemistä, ja nähdä montako pistettä kustakin osa-alueesta on siihen asti kerätty maksimiin verrattuna.
-  - :white_check_mark: Käyttäjä voi merkitä kurssin suoritetuksi, jolloin lisäksi ilmoitetaan suorituspäivä, sekä saatu arvosana.
-  - :white_check_mark: Käyttäjä voi poistaa kyseisen kurssin suorituksen.
+  - Käyttäjä voi merkitä reaaliaikaisesti kurssin pistekertymän etenemistä, ja nähdä montako pistettä hän on kustakin osa-alueesta siihen asti suorittanut maksimiin verrattuna.
+  - Käyttäjä voi merkitä kurssin suoritetuksi, jolloin lisäksi ilmoitetaan suorituspäivä, sekä saatu arvosana.
+  - Käyttäjä voi poistaa kyseisen kurssin suorituksen.
 
-- :hourglass_flowing_sand: Käyttäjä voi nähdä listan omista suoritetuista kursseistaan.
-  - :white_check_mark: Näkymässä näkyy montako kurssia ja opintopistettä tähän asti on suoritettu, ja mikä suoritettujen kurssien keskiarvo on.
-  - :white_check_mark: Listauksessa näkyy lisäksi suoritettujen kurssien nimet, suorituspäivät, opintopisteet ja arvosana.
-  - :hourglass_flowing_sand: Listalla olevien suoritettujen kurssien tietoja pääsee muokkaamaan. Tämä on hyödyllistä, jos käyttäjä haluaa esimerkiksi myöhemmin uusia kurssin kokeen ja korottaa sen arvosanaa.
+- :sunglasses: Käyttäjä voi nähdä listan omista suoritetuista kursseistaan.
+  - Näkymässä näkyy montako opintopistettä käyttäjä on suorittanut hyväksytysti, ja mikä hyväksytysti suoritettujen kurssien keskiarvo on.
+  - Listauksessa näkyy lisäksi suoritettujen kurssien nimet, suorituspäivät, opintopisteet ja arvosana.
+  - Listalla olevien suoritettujen kurssien tietoja pääsee muokkaamaan. Käyttäjä voi muokata kertyneitä pisteitä, muuttaa kurssin statuksen takaisin käynnissä olevaksi tai muokata kurssin arvosanaa tai suorituspäivämäärää. Tämä on hyödyllistä, jos käyttäjä haluaa myöhemmin uusia joitain kurssin osia, tai vaikkapa koko kurssin. 
 
 - :sunglasses: Käyttäjä voi kirjautua ulos.
-  - :white_check_mark: Uloskirjautumisen jälkeen käyttäjä ohjataan sisäänkirjautumissivulle.
+  - Uloskirjautumisen jälkeen käyttäjä ohjataan sisäänkirjautumissivulle.
 
 ## Jatkokehitysideoita
 

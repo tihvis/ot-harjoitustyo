@@ -13,4 +13,5 @@
 | 23.4. | 1    | Suoritettujen kurssien näkymää paranneltu.|
 | 29.4. | 4    | Docstringit lisätty.|
 | 30.4. | 4    | Suoritettujen kurssien näkymää paranneltu (lisätty keskiarvo ja opintopisteet) + niihin liittyvät testit.|
-| yht.  | 52   | | 
+| 11.5. | 4    | Korjattu bugi, missä suoritettua kurssia ei voinut merkitä takaisin käynnissäolevaksi. Testit jaettu repositories- ja services-kansioihin. Typokorjauksia.|
+| yht.  | 56   | | 

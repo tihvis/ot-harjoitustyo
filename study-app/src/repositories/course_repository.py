@@ -235,7 +235,7 @@ class CourseRepository:
         self._connection.commit()
 
     def set_undone(self, course_id):
-        """Asettaa kurssin statukesn käynnissäolevaksi.
+        """Asettaa kurssin statuksen käynnissäolevaksi.
 
         Args:
             course_id:
