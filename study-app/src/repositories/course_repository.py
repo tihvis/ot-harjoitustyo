@@ -234,6 +234,22 @@ class CourseRepository:
 
         self._connection.commit()
 
+    def set_undone(self, course_id):
+        """Asettaa kurssin statukesn käynnissäolevaksi.
+
+        Args:
+            course_id:
+                Merkkijonoarvo, joka kuvaa käynnissä olevaksi merkittävän kurssin id:tä.
+        """
+
+        cursor = self._connection.cursor()
+
+        query = "UPDATE courses SET done = ?, grade = ?, completion_date = ? WHERE course_id = ?"
+
+        cursor.execute(query, (0, None, None, course_id))
+
+        self._connection.commit()
+
     def delete_course(self, course_id):
         """Poistaa kurssin tietokannasta.
 

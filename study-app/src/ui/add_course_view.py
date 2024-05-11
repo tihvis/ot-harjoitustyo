@@ -62,7 +62,8 @@ class AddCourseView:
         info.grid(padx=10, pady=10, sticky=constants.EW)
 
     def _initialize_course_info_fields(self):
-        name_label = ttk.Label(master=self._frame, text="Nimi (1-50 merkkiä): *")
+        name_label = ttk.Label(
+            master=self._frame, text="Nimi (1-50 merkkiä): *")
         self._name_entry = ttk.Entry(master=self._frame)
 
         name_label.grid(padx=10, pady=5, sticky=constants.W)

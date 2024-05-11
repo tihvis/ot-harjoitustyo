@@ -35,6 +35,18 @@ class TestCourseRepository(unittest.TestCase):
         self.assertEqual(
             course.course_id, course_repository.find_completed_courses_by_user_id(self.user_id1)[0].course_id)
 
+    def test_set_undone(self):
+        course = course_repository.create(self.course1)
+        course_repository.set_done(course.course_id, 5, "24.4.2024")
+
+        self.assertEqual(
+            len(course_repository.find_ongoing_courses_by_user_id(self.user_id1)), 0)
+
+        course_repository.set_undone(course.course_id)
+
+        self.assertEqual(
+            len(course_repository.find_ongoing_courses_by_user_id(self.user_id1)), 1)
+
     def test_get_completion_info(self):
         course = course_repository.create(self.course1)
         course_repository.set_done(course.course_id, 5, "24.4.2024")

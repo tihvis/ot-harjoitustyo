@@ -98,6 +98,9 @@ class CoursePageView:
                 course_service.set_done(
                     self._course.course_id, grade, completion_date)
 
+            if self._done_value.get() == 0:
+                course_service.set_undone(self._course.course_id)
+
             self._handle_return()
 
         except ValueError:
@@ -161,7 +164,7 @@ class CoursePageView:
             prev_exercise_points_label.grid(
                 row=3, column=2, padx=10, pady=5, sticky=constants.EW)
 
-        if 2 in self._completed_points:
+        if 2 in self._max_points:
             ex_group_label = ttk.Label(
                 master=self._frame, text="Laskuharjoitukset:")
             self._ex_group_entry = ttk.Entry(master=self._frame, width=20)
@@ -175,7 +178,7 @@ class CoursePageView:
             prev_ex_group_label.grid(
                 row=4, column=2, padx=10, pady=5, sticky=constants.EW)
 
-        if 3 in self._completed_points:
+        if 3 in self._max_points:
             project_label = ttk.Label(master=self._frame, text="Harjoitustyö:")
             self._project_entry = ttk.Entry(master=self._frame, width=20)
             prev_project_label = ttk.Label(master=self._frame, text=(
@@ -188,7 +191,7 @@ class CoursePageView:
             prev_project_label.grid(
                 row=5, column=2, padx=10, pady=5, sticky=constants.EW)
 
-        if 4 in self._completed_points:
+        if 4 in self._max_points:
             exam_label = ttk.Label(master=self._frame, text="Koe:")
             self._exam_entry = ttk.Entry(master=self._frame, width=20)
             prev_exam_label = ttk.Label(master=self._frame, text=(
@@ -201,7 +204,7 @@ class CoursePageView:
             prev_exam_label.grid(row=6, column=2, padx=10,
                                  pady=5, sticky=constants.EW)
 
-        if 5 in self._completed_points:
+        if 5 in self._max_points:
             peer_review_label = ttk.Label(
                 master=self._frame, text="Vertais-/itsearviointi:")
             self._peer_review_entry = ttk.Entry(master=self._frame, width=20)
@@ -215,7 +218,7 @@ class CoursePageView:
             prev_review_label.grid(
                 row=7, column=2, padx=10, pady=5, sticky=constants.EW)
 
-        if 6 in self._completed_points:
+        if 6 in self._max_points:
             feedback_label = ttk.Label(
                 master=self._frame, text="Kurssipalaute:")
             self._feedback_entry = ttk.Entry(master=self._frame, width=20)
@@ -229,7 +232,7 @@ class CoursePageView:
             prev_feedback_label.grid(
                 row=8, column=2, padx=10, pady=5, sticky=constants.EW)
 
-        if 7 in self._completed_points:
+        if 7 in self._max_points:
             other_label = ttk.Label(master=self._frame, text="Muu:")
             self._other_entry = ttk.Entry(master=self._frame, width=20)
             prev_other_label = ttk.Label(master=self._frame, text=(

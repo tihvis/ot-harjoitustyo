@@ -295,6 +295,30 @@ class TestCourseService(unittest.TestCase):
         self.assertEqual(
             len(course_service.get_courses_by_user_id(self.user.user_id)), 1)
 
+    def test_set_course_undone_after_setting_it_done(self):
+        course1 = course_service.create_course(self.user.user_id,
+                                               "Ohjelmistotekniikka", 5, self.max_points)
+
+        course2 = course_service.create_course(self.user.user_id,
+                                               "Tietorakenteet ja algoritmit", 10, self.max_points)
+
+        course_service.set_done(course1.course_id, 5, "20.04.2024")
+        course_service.set_done(course2.course_id, 4, "21.04.2024")
+
+        self.assertEqual(
+            len(course_service.get_completed_courses_by_user_id(self.user.user_id)), 2)
+
+        self.assertEqual(
+            len(course_service.get_courses_by_user_id(self.user.user_id)), 0)
+
+        course_service.set_undone(course1.course_id)
+
+        self.assertEqual(
+            len(course_service.get_completed_courses_by_user_id(self.user.user_id)), 1)
+
+        self.assertEqual(
+            len(course_service.get_courses_by_user_id(self.user.user_id)), 1)
+
     def test_check_completed_credits_when_no_completed_courses(self):
         self.assertEqual(course_service.get_completed_credits_by_user_id(
             self.user.user_id), 0)

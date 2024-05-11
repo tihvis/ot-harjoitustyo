@@ -101,6 +101,16 @@ class CourseService:
         else:
             raise InvalidCompletionValuesError
 
+    def set_undone(self, course_id):
+        """Merkitsee kurssin käynnissä olevaksi.
+
+        Args:
+            course_id:
+                Merkkijonoarvo, joka kuvaa käynnissä olevaksi merkittävän kurssin id:tä.
+        """
+
+        self._course_repository.set_undone(course_id=course_id)
+
     def get_courses(self):
         """Palauttaa kaikki kurssit.
 
